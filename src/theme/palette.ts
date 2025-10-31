@@ -13,4 +13,4 @@ export const palette = {
   gray2: "#BEBEBE",
 
   white: "#FFFFFF",
-}
+};

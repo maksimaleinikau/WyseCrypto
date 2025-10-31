@@ -1,8 +1,7 @@
-import { FontWeight } from "./../../node_modules/react-native-svg/lib/typescript/lib/extract/types.d";
 import { createTheme } from "@shopify/restyle";
 import { palette } from "./palette";
 
-export const theme = createTheme({
+export const Theme = createTheme({
   spacing: {
     xs: 4,
     s: 8,
@@ -36,6 +35,12 @@ export const theme = createTheme({
   },
 
   textVariants: {
+    defaults: {
+      fontSize: 12,
+      fontWeight: "700",
+      color: "textPrimary",
+      lineHeight: "22",
+    },
     headerLX: {
       fontSize: 32,
       fontWeight: "700",
