@@ -13,4 +13,7 @@ export const palette = {
   gray2: "#BEBEBE",
 
   white: "#FFFFFF",
+
+  buttonSecondary: "#F8FCFD",
+  buttonDisabled: "#EBEFF2",
 };
