@@ -1,10 +1,13 @@
-import { Box } from "../components/ui/Box";
-import Button from "../components/ui/Button";
-import DeleteIcon from "../components/ui/icons/DeleteIcon";
-import LogoutIcon from "../components/ui/icons/LogoutIcon";
-import NotificationIcon from "../components/ui/icons/NotificationIcon";
-import WalletIcon from "../components/ui/icons/WalletIcon";
-import { Text } from "../components/ui/Text";
+import { Box } from "../components/ui";
+import { Button } from "../components/ui";
+import { Text } from "../components/ui";
+import {
+  LogoutIcon,
+  NotificationIcon,
+  WalletIcon,
+  DeleteIcon,
+} from "../components/ui";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 export const TemporaryScreen = () => {
   return (
@@ -37,6 +40,8 @@ export const TemporaryScreen = () => {
         <Button
           variant="primary"
           label="Button"
+          borderWidth={2}
+          borderColor="danger"
           onPress={() => console.log("Pressed")}
         ></Button>
         <Button

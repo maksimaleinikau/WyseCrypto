@@ -47,7 +47,7 @@ const theme = createTheme({
       fontSize: 12,
       fontWeight: "700",
       color: "textPrimary",
-      lineHeight: "22",
+      lineHeight: 22,
     },
     headerLX: {
       fontSize: 32,
@@ -64,76 +64,10 @@ const theme = createTheme({
       fontWeight: "600",
       color: "textFourtiary",
     },
-    bodyXL: {
-      fontSize: 20,
-      fontWeight: "700",
-      color: "textPrimary",
-    },
-    bodyLarge: {
-      fontsize: "16",
-      fontWeight: "700",
-      color: "textPrimary",
-    },
-    bodyLarge2: {
-      fontsize: "16",
-      fontWeight: "600",
-      color: "textPrimary",
-    },
-    bodyLarge3: {
-      fontsize: "16",
-      fontWeight: "400",
-      color: "textSecondary",
-      lineHeight: "140%",
-    },
-    bodyMiddle: {
-      fontsize: "14",
-      fontWeight: "400",
-      color: "textPimary",
-    },
-    bodyMiddle2: {
-      fontsize: "14",
-      fontWeight: "400",
-      color: "textSecondary",
-    },
-    bodyMiddle3: {
-      fontsize: "14",
-      fontWeight: "400",
-      color: "textTertiary",
-    },
-    bodySmall: {
-      fontsize: "10",
-      fontWeight: "400",
-      color: "textSecondary",
-    },
-    bodySmall2: {
-      fontsize: "10",
-      fontWeight: "400",
-      color: "textTertiary",
-    },
-
-    buttonPrimary: {
+    button: {
       fontSize: 14,
       fontWeight: "700",
       textAlign: "center",
-      color: "textInverted",
-    },
-    buttonSecondary: {
-      fontSize: 14,
-      fontWeight: "700",
-      textAlign: "center",
-      color: "textPrimary",
-    },
-    buttonDanger: {
-      fontSize: 14,
-      fontWeight: "700",
-      textAlign: "center",
-      color: "textDanger",
-    },
-    buttonDisabled: {
-      fontSize: 14,
-      fontWeight: "700",
-      textAlign: "center",
-      color: "textTertiary",
     },
   },
   buttonVariants: {
@@ -141,24 +75,28 @@ const theme = createTheme({
       borderRadius: 4,
       alignItems: "center",
       justifyContent: "center",
-      width: '100%',
+      width: "100%",
       paddingVertical: "sm",
     },
     primary: {
       backgroundColor: "primary",
+      color: "textInverted",
     },
     secondary: {
       backgroundColor: "buttonSecondary",
+      color: "textPrimary",
     },
     danger: {
       backgroundColor: "cardBackground",
       borderWidth: 1,
       borderColor: "danger",
+      color: "textDanger",
     },
     disabled: {
       backgroundColor: "buttonDisabled",
       borderWidth: 1,
       borderColor: "buttonDisabled",
+      color: "textTertiary",
     },
   },
 });
