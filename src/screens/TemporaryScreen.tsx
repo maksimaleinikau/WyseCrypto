@@ -9,6 +9,8 @@ import {
 } from "../components/ui";
 
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Input } from "../components/ui/Input";
+
 export const TemporaryScreen = () => {
   return (
     <>
@@ -37,6 +39,15 @@ export const TemporaryScreen = () => {
             <DeleteIcon />
           </Box>
         </Box>
+        <Input label="Default" placeholder="Введите имя" />
+        <Input
+          label="Password"
+          variant="focused"
+          placeholder="enter PASSWORD"
+          type="password"
+        />
+        <Input placeholder="Search" type="search" />
+
         <Button
           variant="primary"
           label="Button"

@@ -1,5 +1,6 @@
 export { Box } from "./Box";
-export { Button } from "./Button";
 export { Text } from "./Text";
+export { default as Button } from "./Button";
+export { Input } from "./Input";
 
 export * from "./icons";

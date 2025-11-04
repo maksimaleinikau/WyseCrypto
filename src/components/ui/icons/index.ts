@@ -21,3 +21,6 @@ export { default as StarIcon } from "./StarIcon";
 export { default as TickSquareIcon } from "./TickSquareIcon";
 export { default as TimeCircleIcon } from "./TimeCircleIcon";
 export { default as WalletIcon } from "./WalletIcon";
+export { default as EyeIcon } from "./EyeIcon";
+export { default as EyeOffIcon } from "./EyeOffIcon";
+export { default as SearchIcon } from "./SearchIcon";

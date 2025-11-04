@@ -15,8 +15,8 @@ import {
   useTheme,
 } from "@shopify/restyle";
 
-import { Theme } from "../../../theme";
-import { Text } from "../Text";
+import { Theme } from "../../theme";
+import { Text } from "./Text";
 import { TouchableOpacity } from "react-native";
 
 type RestyleProps = SpacingProps<Theme> &
@@ -42,7 +42,7 @@ type Props = RestyleProps & {
 
 const Button = ({ onPress, label, variant = "primary", ...rest }: Props) => {
   const theme = useTheme<Theme>();
-  const props = useRestyle(restyleFunctions, { variant, ...rest } as any); //
+  const props = useRestyle(restyleFunctions, { variant, ...rest } as any);
   const textColor = theme.buttonVariants[variant]?.color ?? "textPrimary";
   console.log(textColor);
   return (

@@ -16,4 +16,7 @@ export const palette = {
 
   buttonSecondary: "#F8FCFD",
   buttonDisabled: "#EBEFF2",
+
+  inputDisabled: "#EBF2EB",
+  inputBorder: "#E9FCE9",
 };
