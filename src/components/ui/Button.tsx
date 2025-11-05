@@ -44,7 +44,7 @@ const Button = ({ onPress, label, variant = "primary", ...rest }: Props) => {
   const theme = useTheme<Theme>();
   const props = useRestyle(restyleFunctions, { variant, ...rest } as any);
   const textColor = theme.buttonVariants[variant]?.color ?? "textPrimary";
-  console.log(textColor);
+
   return (
     <TouchableOpacity onPress={onPress} {...props}>
       <Text variant="button" color={textColor}>

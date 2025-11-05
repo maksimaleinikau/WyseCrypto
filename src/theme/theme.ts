@@ -102,6 +102,10 @@ const theme = createTheme({
       fontWeight: "400",
       textAlign: "center",
     },
+    uploadLabel: {
+      fontSize: 12,
+      fontWeight: "400",
+    },
   },
   buttonVariants: {
     defaults: {
@@ -152,6 +156,10 @@ const theme = createTheme({
     disabled: {
       backgroundColor: "inputDisabled",
       borderColor: "inputDisabled",
+    },
+    textArea: {
+      minHeight: 100,
+      paddingVertical: "m",
     },
   },
   badgeVariants: {

@@ -24,3 +24,6 @@ export { default as WalletIcon } from "./WalletIcon";
 export { default as EyeIcon } from "./EyeIcon";
 export { default as EyeOffIcon } from "./EyeOffIcon";
 export { default as SearchIcon } from "./SearchIcon";
+export { default as RadioButtonIcon } from "./RadioButtonIcon";
+export { default as RadioButtonActiveIcon } from "./RadioButtonActiveIcon";
+export { default as UploadIcon } from "./UploadIcon";

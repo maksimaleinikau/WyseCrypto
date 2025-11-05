@@ -18,7 +18,13 @@ import { Theme } from "../../theme";
 import { Text } from "./Text";
 import { Box } from "./Box";
 import { useState } from "react";
-import { EyeIcon, EyeOffIcon, SearchIcon } from "./icons";
+import {
+  EyeIcon,
+  EyeOffIcon,
+  SearchIcon,
+  RadioButtonIcon,
+  RadioButtonActiveIcon,
+} from "./icons";
 
 type RestyleProps = SpacingProps<Theme> &
   BorderProps<Theme> &
@@ -38,8 +44,11 @@ export interface InputProps extends RestyleProps, TextInputProps {
   label?: string;
   onValueChange?: (value: string) => void;
   autoFocusVariant?: boolean;
-  type?: "text" | "password" | "search";
+  type?: "text" | "password" | "search" | "textarea";
   rightIcon?: React.ReactNode;
+  multiline?: boolean;
+  numberOfLines?: number;
+  withRadio?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -51,13 +60,24 @@ export const Input: React.FC<InputProps> = ({
   autoFocusVariant = true,
   type = "text",
   rightIcon,
+  multiline = type === "textarea",
+  numberOfLines = multiline ? 4 : 1,
+  withRadio = false,
   ...rest
 }) => {
   const theme = useTheme<Theme>();
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isRadioChecked, setIsRadioChecked] = useState(false);
+
+  const getVariant = (): string => {
+    if (type === "textarea") return "textArea";
+    if (autoFocusVariant && isFocused) return "focused";
+    return variant;
+  };
+
   const props = useRestyle(restyleFunctions as any, {
-    variant: autoFocusVariant && isFocused ? "focused" : variant,
+    variant: getVariant(),
     ...rest,
   });
 
@@ -83,6 +103,10 @@ export const Input: React.FC<InputProps> = ({
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+  const toggleRadio = () => {
+    setIsRadioChecked(!isRadioChecked);
+  };
+
   const getRightIcon = () => {
     if (rightIcon) return rightIcon;
     if (type === "password") {
@@ -103,33 +127,52 @@ export const Input: React.FC<InputProps> = ({
 
   const rightIconComponent = getRightIcon();
   const hasRightIcon = !!rightIconComponent;
+  const hasRadio = withRadio && !multiline;
 
   return (
     <Box>
       {label && <Text variant="inputLabel">{label}</Text>}
-      <Box position="relative">
-        {hasRightIcon && (
-          <Box position="absolute" right={16} top={13} zIndex={1}>
-            {rightIconComponent}
-          </Box>
+      <Box flexDirection="row" alignItems="center" gap="s">
+        {hasRadio && (
+          <TouchableOpacity
+            onPress={toggleRadio}
+            disabled={variant === "disabled"}
+          >
+            {isRadioChecked ? <RadioButtonActiveIcon /> : <RadioButtonIcon />}
+          </TouchableOpacity>
         )}
-        <TextInput
-          {...props}
-          {...rest}
-          onChangeText={handleChangeText}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholderTextColor={placeholderColor}
-          placeholder={placeholder}
-          editable={variant !== "disabled"}
-          style={[
-            props.style,
-            { color: textColor, paddingRight: hasRightIcon ? 40 : undefined },
-          ]}
-          secureTextEntry={type === "password" && !isPasswordVisible}
-          autoCapitalize={type === "password" ? "none" : undefined}
-          autoCorrect={type === "password" ? false : undefined}
-        />
+        <Box position="relative" flex={1}>
+          {hasRightIcon && !multiline && (
+            <Box position="absolute" right={16} top={13} zIndex={1}>
+              {rightIconComponent}
+            </Box>
+          )}
+          <TextInput
+            {...props}
+            {...rest}
+            onChangeText={handleChangeText}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            placeholderTextColor={placeholderColor}
+            placeholder={placeholder}
+            editable={variant !== "disabled"}
+            style={[
+              props.style,
+              {
+                color: textColor,
+                paddingRight: hasRightIcon && multiline ? 40 : undefined,
+                textAlignVertical: multiline ? "top" : "center",
+                minHeight: multiline ? 100 : undefined,
+                paddingLeft: hasRadio ? 8 : undefined,
+              },
+            ]}
+            secureTextEntry={type === "password" && !isPasswordVisible}
+            autoCapitalize={type === "password" ? "none" : undefined}
+            autoCorrect={type === "password" ? false : undefined}
+            multiline={multiline}
+            numberOfLines={multiline ? numberOfLines : 1}
+          />
+        </Box>
       </Box>
     </Box>
   );
