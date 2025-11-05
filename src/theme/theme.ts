@@ -47,6 +47,12 @@ const theme = createTheme({
     inputFocus: palette.primary,
     inputDisabled: palette.inputDisabled,
     inputLabel: palette.black,
+
+    successLight: palette.successLight,
+    pendingLight: palette.pendingLight,
+    errorLight: palette.errorLight,
+    pending: palette.warning,
+    failure: palette.danger,
   },
 
   textVariants: {
@@ -85,6 +91,16 @@ const theme = createTheme({
       fontSize: 14,
       fontWeight: "400",
       marginBottom: "s",
+    },
+    badgeLabel: {
+      fontSize: 16,
+      fontWeight: "400",
+      marginBottom: "m",
+    },
+    badgeStatus: {
+      fontSize: 12,
+      fontWeight: "400",
+      textAlign: "center",
     },
   },
   buttonVariants: {
@@ -136,6 +152,31 @@ const theme = createTheme({
     disabled: {
       backgroundColor: "inputDisabled",
       borderColor: "inputDisabled",
+    },
+  },
+  badgeVariants: {
+    defaults: {
+      padding: "m",
+      marginBottom: "s",
+    },
+    default: {},
+    success: {
+      backgroundColor: "successLight",
+      borderRadius: 8,
+      paddingHorizontal: "s",
+      paddingVertical: "xs",
+    },
+    pending: {
+      backgroundColor: "pendingLight",
+      borderRadius: 8,
+      paddingHorizontal: "s",
+      paddingVertical: "xs",
+    },
+    failure: {
+      backgroundColor: "errorLight",
+      borderRadius: 8,
+      paddingHorizontal: "s",
+      paddingVertical: "xs",
     },
   },
 });

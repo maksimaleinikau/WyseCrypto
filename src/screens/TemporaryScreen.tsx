@@ -1,6 +1,4 @@
-import { Box } from "../components/ui";
-import { Button } from "../components/ui";
-import { Text } from "../components/ui";
+import { Badge, Box, Button, Text } from "../components/ui";
 import {
   LogoutIcon,
   NotificationIcon,
@@ -46,8 +44,15 @@ export const TemporaryScreen = () => {
           placeholder="enter PASSWORD"
           type="password"
         />
-        <Input placeholder="Search" type="search" />
-
+        <Input placeholder="Search" type="search" label="Search" />
+        <Badge
+          label="Badge"
+          statuses={{
+            success: 52516516,
+            pending: "In Progress",
+            failure: 115525,
+          }}
+        />
         <Button
           variant="primary"
           label="Button"

@@ -19,4 +19,8 @@ export const palette = {
 
   inputDisabled: "#EBF2EB",
   inputBorder: "#E9FCE9",
+
+  successLight: "#E0FFF0",
+  pendingLight: "#FFFCE0",
+  errorLight: "#FFE0E0",
 };
