@@ -17,7 +17,6 @@ import { Theme } from "../../theme";
 import { Text } from "./Text";
 import { Box } from "./Box";
 import { TouchableOpacity } from "react-native";
-import { ArrowUpRightIcon } from "./icons";
 
 export type BadgeVariant = "success" | "pending" | "failure";
 
@@ -51,21 +50,10 @@ const Badge = ({
     variant,
     ...rest,
   });
-  const showIcon = variant !== "pending";
-  const iconRotation = variant === "failure" ? "180deg" : "0deg";
 
   const badgeContent = (
     <Box {...props}>
-      {showIcon && (
-        <Box style={{ transform: [{ rotate: iconRotation }] }}>
-          <ArrowUpRightIcon color="white" />
-        </Box>
-      )}
-      <Text
-        variant="badgeStatus"
-        color={`${variant}Text`}
-        ml={showIcon ? "xs" : undefined}
-      >
+      <Text variant="badgeStatus" color={`${variant}Text`}>
         {label}
       </Text>
     </Box>

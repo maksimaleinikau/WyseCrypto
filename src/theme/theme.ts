@@ -3,6 +3,7 @@ import { palette } from "./palette";
 
 const theme = createTheme({
   spacing: {
+    xxs: 2,
     xs: 4,
     s: 8,
     sm: 11,
@@ -173,12 +174,13 @@ const theme = createTheme({
     defaults: {
       padding: "m",
       marginBottom: "s",
-      borderRadius: 8,
-      paddingHorizontal: "xs",
+      borderRadius: 12,
+      paddingHorizontal: "s",
       paddingVertical: "xs",
       alignSelf: "flex-start",
       flexDirection: "row",
       alignItems: "center",
+      gap: "xxs",
     },
     default: {},
     success: {
