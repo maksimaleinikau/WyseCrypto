@@ -1,4 +1,4 @@
-import { TextInput, TextInputProps, TouchableOpacity } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import {
   useRestyle,
   spacing,
@@ -18,13 +18,6 @@ import { Theme } from "../../theme";
 import { Text } from "./Text";
 import { Box } from "./Box";
 import { useState } from "react";
-import {
-  EyeIcon,
-  EyeOffIcon,
-  SearchIcon,
-  RadioButtonIcon,
-  RadioButtonActiveIcon,
-} from "./icons";
 
 type RestyleProps = SpacingProps<Theme> &
   BorderProps<Theme> &
@@ -43,12 +36,10 @@ export interface InputProps extends RestyleProps, TextInputProps {
   variant?: "default" | "focused" | "disabled";
   label?: string;
   onValueChange?: (value: string) => void;
-  autoFocusVariant?: boolean;
-  type?: "text" | "password" | "search" | "textarea";
+  errorMessage?: string;
+  leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   multiline?: boolean;
-  numberOfLines?: number;
-  withRadio?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -57,22 +48,18 @@ export const Input: React.FC<InputProps> = ({
   onValueChange,
   onChangeText,
   placeholder,
-  autoFocusVariant = true,
-  type = "text",
+  errorMessage,
+  leftIcon,
   rightIcon,
-  multiline = type === "textarea",
-  numberOfLines = multiline ? 4 : 1,
-  withRadio = false,
+  multiline = false,
   ...rest
 }) => {
   const theme = useTheme<Theme>();
   const [isFocused, setIsFocused] = useState(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isRadioChecked, setIsRadioChecked] = useState(false);
 
   const getVariant = (): string => {
-    if (type === "textarea") return "textArea";
-    if (autoFocusVariant && isFocused) return "focused";
+    if (errorMessage) return "error";
+    if (isFocused) return "focused";
     return variant;
   };
 
@@ -82,7 +69,6 @@ export const Input: React.FC<InputProps> = ({
   });
 
   const textColor = theme.colors.inputText;
-
   const placeholderColor =
     variant === "disabled"
       ? theme.colors.inputDisabledPlaceholder
@@ -100,80 +86,58 @@ export const Input: React.FC<InputProps> = ({
   const handleBlur = () => {
     setIsFocused(false);
   };
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-  const toggleRadio = () => {
-    setIsRadioChecked(!isRadioChecked);
-  };
-
-  const getRightIcon = () => {
-    if (rightIcon) return rightIcon;
-    if (type === "password") {
-      return (
-        <TouchableOpacity
-          onPress={togglePasswordVisibility}
-          disabled={variant === "disabled"}
-        >
-          {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-        </TouchableOpacity>
-      );
-    }
-    if (type === "search") {
-      return <SearchIcon />;
-    }
-    return null;
-  };
-
-  const rightIconComponent = getRightIcon();
-  const hasRightIcon = !!rightIconComponent;
-  const hasRadio = withRadio && !multiline;
+  const hasLeftIcon = !!leftIcon;
+  const hasRightIcon = !!rightIcon;
 
   return (
     <Box>
       {label && <Text variant="inputLabel">{label}</Text>}
-      <Box flexDirection="row" alignItems="center" gap="s">
-        {hasRadio && (
-          <TouchableOpacity
-            onPress={toggleRadio}
-            disabled={variant === "disabled"}
+      <Box position="relative">
+        {hasLeftIcon && (
+          <Box
+            position="absolute"
+            left={12}
+            top={12}
+            zIndex={1}
+            backgroundColor="blue"
           >
-            {isRadioChecked ? <RadioButtonActiveIcon /> : <RadioButtonIcon />}
-          </TouchableOpacity>
+            {leftIcon}
+          </Box>
         )}
-        <Box position="relative" flex={1}>
-          {hasRightIcon && !multiline && (
-            <Box position="absolute" right={16} top={13} zIndex={1}>
-              {rightIconComponent}
-            </Box>
-          )}
-          <TextInput
-            {...props}
-            {...rest}
-            onChangeText={handleChangeText}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            placeholderTextColor={placeholderColor}
-            placeholder={placeholder}
-            editable={variant !== "disabled"}
-            style={[
-              props.style,
-              {
-                color: textColor,
-                paddingRight: hasRightIcon && multiline ? 40 : undefined,
-                textAlignVertical: multiline ? "top" : "center",
-                minHeight: multiline ? 100 : undefined,
-                paddingLeft: hasRadio ? 8 : undefined,
-              },
-            ]}
-            secureTextEntry={type === "password" && !isPasswordVisible}
-            autoCapitalize={type === "password" ? "none" : undefined}
-            autoCorrect={type === "password" ? false : undefined}
-            multiline={multiline}
-            numberOfLines={multiline ? numberOfLines : 1}
-          />
-        </Box>
+        {hasRightIcon && (
+          <Box position="absolute" right={16} top={13} zIndex={1}>
+            {rightIcon}
+          </Box>
+        )}
+
+        <TextInput
+          {...props}
+          {...rest}
+          onChangeText={handleChangeText}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholderTextColor={placeholderColor}
+          placeholder={placeholder}
+          editable={variant !== "disabled"}
+          multiline={multiline}
+          style={[
+            props.style,
+            {
+              color: textColor,
+              paddingVertical: 12,
+              paddingLeft: hasLeftIcon ? 0 : 12,
+              paddingRight: hasRightIcon ? 0 : 12,
+              textAlignVertical: multiline ? "top" : "center",
+              minHeight: multiline ? 100 : undefined,
+            },
+          ]}
+        />
       </Box>
+      {errorMessage && (
+        <Text variant="inputError" color="danger">
+          {errorMessage}
+        </Text>
+      )}
     </Box>
   );
 };

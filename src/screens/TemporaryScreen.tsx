@@ -1,4 +1,14 @@
-import { Button, Input, Upload, Checkbox, Card, Badge } from "../components/ui";
+import {
+  Button,
+  Input,
+  Upload,
+  Checkbox,
+  Card,
+  Badge,
+  PasswordInput,
+  SearchInput,
+  TextArea,
+} from "../components/ui";
 import { Text } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -16,21 +26,16 @@ export const TemporaryScreen = () => {
           checked={isChecked}
           onPress={() => setIsChecked(!isChecked)}
         />
+        <TextArea placeholder="A lot of text" />
         <Upload onPress={() => console.log("Upload pressed")} />
-        <Input label="RadioButton" placeholder="Text" withRadio={true} />
-        <Input label="Default" placeholder="Enter name" />
-        <Input
-          label="Password"
-          variant="focused"
+        <Input placeholder="Default Input" />
+        <Input placeholder="Disabled" variant="disabled" />
+        <PasswordInput
           placeholder="Enter Password"
-          type="password"
+          label="Password"
+          errorMessage="Invalid Password"
         />
-        <Input placeholder="Search" type="search" label="Search" />
-        <Input
-          placeholder="Enter description"
-          type="textarea"
-          label="Textarea"
-        />
+        <SearchInput />
         <Badge
           variant="pending"
           label="Pending"

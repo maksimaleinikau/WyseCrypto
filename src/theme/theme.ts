@@ -95,6 +95,11 @@ const theme = createTheme({
       fontWeight: "400",
       marginBottom: "s",
     },
+    inputError: {
+      fontSize: 14,
+      fontWeight: "300",
+      lineHeight: "100%",
+    },
     badgeStatus: {
       fontSize: 12,
       fontWeight: "400",
@@ -142,7 +147,7 @@ const theme = createTheme({
       borderColor: "inputBorder",
       borderRadius: 8,
       color: "inputText",
-      paddingLeft: "m",
+      paddingHorizontal: "m",
       paddingVertical: "sm2",
       fontSize: 14,
       marginBottom: "s",
@@ -159,13 +164,17 @@ const theme = createTheme({
       minHeight: 100,
       paddingVertical: "m",
     },
+    error: {
+      borderColor: "danger",
+      borderWidth: 1,
+    },
   },
   badgeVariants: {
     defaults: {
       padding: "m",
       marginBottom: "s",
       borderRadius: 8,
-      paddingHorizontal: "s",
+      paddingHorizontal: "xs",
       paddingVertical: "xs",
       alignSelf: "flex-start",
       flexDirection: "row",
