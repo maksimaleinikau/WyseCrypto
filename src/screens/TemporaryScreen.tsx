@@ -1,10 +1,21 @@
-import { Badge, Button, Input, Upload } from "../components/ui";
+import { Button, Input, Upload, Checkbox, Card, Badge } from "../components/ui";
+import { Text } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useState } from "react";
+
 export const TemporaryScreen = () => {
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <>
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 10 }}>
+        <Card>
+          <Text variant="headerLarge">Text in Card</Text>
+        </Card>
+        <Checkbox
+          checked={isChecked}
+          onPress={() => setIsChecked(!isChecked)}
+        />
         <Upload onPress={() => console.log("Upload pressed")} />
         <Input label="RadioButton" placeholder="Text" withRadio={true} />
         <Input label="Default" placeholder="Enter name" />
@@ -21,12 +32,19 @@ export const TemporaryScreen = () => {
           label="Textarea"
         />
         <Badge
-          label="Badge"
-          statuses={{
-            success: 52516516,
-            pending: "In Progress",
-            failure: 115525,
-          }}
+          variant="pending"
+          label="Pending"
+          onPress={() => console.log("Badge pressed")}
+        />
+        <Badge
+          variant="success"
+          label="Success!"
+          onPress={() => console.log("Badge pressed")}
+        />
+        <Badge
+          variant="failure"
+          label="Failure!"
+          onPress={() => console.log("Badge pressed")}
         />
         <Button
           variant="primary"
@@ -37,16 +55,6 @@ export const TemporaryScreen = () => {
         ></Button>
         <Button
           variant="secondary"
-          label="Button"
-          onPress={() => console.log("Pressed")}
-        ></Button>
-        <Button
-          variant="danger"
-          label="Button"
-          onPress={() => console.log("Pressed")}
-        ></Button>
-        <Button
-          variant="disabled"
           label="Button"
           onPress={() => console.log("Pressed")}
         ></Button>

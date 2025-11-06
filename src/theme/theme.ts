@@ -33,26 +33,29 @@ const theme = createTheme({
 
     white: palette.white,
 
-    buttonSecondary: palette.buttonSecondary,
-    buttonDisabled: palette.buttonDisabled,
+    buttonSecondary: palette.ligthgray,
+    buttonDisabled: palette.gray3,
 
     iconColor: palette.gray2,
     iconActiveColor: palette.primary,
 
     inputBackground: palette.white,
-    inputBorder: palette.inputBorder,
+    inputBorder: palette.primaryLight,
     inputDisabledPlaceholder: palette.gray,
     inputPlaceholder: palette.gray2,
     inputText: palette.black,
     inputFocus: palette.primary,
-    inputDisabled: palette.inputDisabled,
+    inputDisabled: palette.gray4,
     inputLabel: palette.black,
 
-    successLight: palette.successLight,
-    pendingLight: palette.pendingLight,
-    errorLight: palette.errorLight,
-    pending: palette.warning,
-    failure: palette.danger,
+    successLight: palette.primarylight2,
+    pendingLight: palette.warninglight,
+    errorLight: palette.dangerlight,
+
+    checkboxColor: palette.blue,
+    successText: palette.success,
+    pendingText: palette.warning,
+    failureText: palette.danger,
   },
 
   textVariants: {
@@ -91,11 +94,6 @@ const theme = createTheme({
       fontSize: 14,
       fontWeight: "400",
       marginBottom: "s",
-    },
-    badgeLabel: {
-      fontSize: 16,
-      fontWeight: "400",
-      marginBottom: "m",
     },
     badgeStatus: {
       fontSize: 12,
@@ -166,25 +164,22 @@ const theme = createTheme({
     defaults: {
       padding: "m",
       marginBottom: "s",
+      borderRadius: 8,
+      paddingHorizontal: "s",
+      paddingVertical: "xs",
+      alignSelf: "flex-start",
+      flexDirection: "row",
+      alignItems: "center",
     },
     default: {},
     success: {
       backgroundColor: "successLight",
-      borderRadius: 8,
-      paddingHorizontal: "s",
-      paddingVertical: "xs",
     },
     pending: {
       backgroundColor: "pendingLight",
-      borderRadius: 8,
-      paddingHorizontal: "s",
-      paddingVertical: "xs",
     },
     failure: {
       backgroundColor: "errorLight",
-      borderRadius: 8,
-      paddingHorizontal: "s",
-      paddingVertical: "xs",
     },
   },
 });

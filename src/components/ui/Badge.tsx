@@ -2,102 +2,79 @@ import {
   useRestyle,
   spacing,
   backgroundColor,
-  layout,
   createVariant,
   VariantProps,
   SpacingProps,
   BorderProps,
   BackgroundColorProps,
   LayoutProps,
+  color,
+  ColorProps,
   useTheme,
   composeRestyleFunctions,
-  color,
-  border,
 } from "@shopify/restyle";
 import { Theme } from "../../theme";
 import { Text } from "./Text";
 import { Box } from "./Box";
 import { TouchableOpacity } from "react-native";
+import { ArrowUpRightIcon } from "./icons";
+
+export type BadgeVariant = "success" | "pending" | "failure";
 
 type RestyleProps = SpacingProps<Theme> &
   BorderProps<Theme> &
   BackgroundColorProps<Theme> &
   LayoutProps<Theme> &
-  VariantProps<Theme, "badgeVariants">;
+  VariantProps<Theme, "badgeVariants"> &
+  ColorProps<Theme>;
 
 const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
   spacing,
   backgroundColor,
-  layout,
+  color,
   createVariant({ themeKey: "badgeVariants" }),
 ]);
 
-export type StatusType = "success" | "pending" | "failure";
+type BadgeProps = RestyleProps & {
+  onPress: () => void;
+  label: number | string;
+  variant?: "success" | "pending" | "failure";
+};
 
-export interface BadgeProps extends RestyleProps {
-  label: string;
-  statuses: {
-    success?: string | number;
-    pending?: string | number;
-    failure?: string | number;
-  };
-  onStatusPress?: (status: StatusType, count?: number) => void;
-}
-
-export const Badge: React.FC<BadgeProps> = ({
+const Badge = ({
+  variant = "success",
   label,
-  statuses,
-  onStatusPress,
-  variant = "default",
+  onPress,
   ...rest
-}) => {
-  const theme = useTheme<Theme>();
+}: BadgeProps) => {
   const props = useRestyle(restyleFunctions as any, {
     variant,
     ...rest,
   });
+  const showIcon = variant !== "pending";
+  const iconRotation = variant === "failure" ? "180deg" : "0deg";
 
-  const statusItems = [
-    { type: "success" as const, count: statuses.success },
-    { type: "pending" as const, count: statuses.pending },
-    { type: "failure" as const, count: statuses.failure },
-  ].filter((item) => item.count !== undefined);
-
-  return (
+  const badgeContent = (
     <Box {...props}>
-      <Text variant="badgeLabel" mb="sm">
+      {showIcon && (
+        <Box style={{ transform: [{ rotate: iconRotation }] }}>
+          <ArrowUpRightIcon color="white" />
+        </Box>
+      )}
+      <Text
+        variant="badgeStatus"
+        color={`${variant}Text`}
+        ml={showIcon ? "xs" : undefined}
+      >
         {label}
       </Text>
-      <Box
-        flexDirection="row"
-        gap="m"
-        justifyContent="center"
-        alignItems="center"
-      >
-        {statusItems.map((item) => {
-          const statusProps = useRestyle(restyleFunctions as any, {
-            variant: item.type,
-          });
-          return (
-            <TouchableOpacity
-              key={item.type}
-              onPress={() => {
-                console.log(`Clicked ${item.type}:`, item.count);
-                onStatusPress?.(item.type);
-              }}
-            >
-              <Box {...statusProps}>
-                <Text
-                  variant="badgeStatus"
-                  color={item.type as keyof Theme["colors"]}
-                >
-                  {item.count}
-                </Text>
-              </Box>
-            </TouchableOpacity>
-          );
-        })}
-      </Box>
     </Box>
   );
+  return onPress ? (
+    <TouchableOpacity onPress={onPress}>{badgeContent}</TouchableOpacity>
+  ) : (
+    badgeContent
+  );
 };
+
+export default Badge;
