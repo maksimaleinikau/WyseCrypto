@@ -118,7 +118,7 @@ const theme = createTheme({
       justifyContent: "center",
       width: "100%",
       paddingVertical: "sm",
-      marginBottom: "xs",
+      marginBottom: "m",
     },
     primary: {
       backgroundColor: "primary",

@@ -5,8 +5,10 @@ export { Input } from "./Input";
 export { default as Badge } from "./Badge";
 export { Upload } from "./Upload";
 export { Checkbox } from "./Checkbox";
-export { Card } from "./Card";
+export { Card, CardProps } from "./Card";
 export { PasswordInput } from "./PasswordInput";
 export { SearchInput } from "./SearchInput";
 export { TextArea } from "./TextArea";
+export { ListItem } from "./ListItem";
+
 export * from "./icons";

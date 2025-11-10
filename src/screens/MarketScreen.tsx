@@ -1,11 +1,9 @@
-import { Text, View } from "react-native";
-
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Box, Text } from "../components/ui";
 export const MarketScreen = () => {
   return (
-    <View
-      style={{ marginTop: 200, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>MarketScreen</Text>
-    </View>
+    <Box>
+      <Text>Market Screen</Text>
+    </Box>
   );
 };
