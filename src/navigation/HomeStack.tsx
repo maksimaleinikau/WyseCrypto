@@ -4,6 +4,7 @@ import {
   PortfolioScreen,
   HoldingDetailsScreen,
   SecurityDetailsScreen,
+  PlaceOrderScreen
 } from "../screens";
 import { HomeStackParamList } from "./types";
 
@@ -22,8 +23,32 @@ export const HomeStack = () => {
         }}
       />
       <Stack.Screen name="Portfolio" component={PortfolioScreen} />
-      <Stack.Screen name="HoldingDetails" component={HoldingDetailsScreen} />
-      <Stack.Screen name="SecurityDetails" component={SecurityDetailsScreen} />
+      <Stack.Screen
+        name="HoldingDetails"
+        component={HoldingDetailsScreen}
+        options={({ route }) => ({
+          headerShown: true,
+          headerTitle: route.params.investment.name,
+          headerBackTitleVisible: false,
+        })}
+      />
+      <Stack.Screen
+        name="SecurityDetails"
+        component={SecurityDetailsScreen}
+        options={({ route }) => ({
+          headerShown: true,
+          headerTitle: route.params.security.name,
+          headerBackTitleVisible: false,
+        })}
+      />
+      <Stack.Screen
+        name="PlaceOrder"
+        component={PlaceOrderScreen}
+        options={({ route }) => ({
+          headerTitle: `${route.params.side} ${route.params.security.name}`,
+          headerBackTitleVisible: false,
+        })}
+      />
     </Stack.Navigator>
   );
 };

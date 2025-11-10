@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MarketScreen, ProfileScreen } from "../screens";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "../theme";
@@ -12,6 +11,8 @@ import ProfileActiveIcon from "../../assets/TempTabsIcons/ProfileActiveIcon";
 import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
 import { Box } from "../components/ui";
+import { MarketStack } from "./MarketStack";
+import { ProfileStack } from "./ProfileStack";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -35,25 +36,28 @@ export const MainTabs = () => {
           }}
         >
           <Tab.Screen
-            name="Home"
+            name="HomeTab"
             component={HomeStack}
             options={{
+              headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? <HomeActiveIcon /> : <HomeInactiveIcon />,
             }}
           />
           <Tab.Screen
-            name="Market"
-            component={MarketScreen}
+            name="MarketTab"
+            component={MarketStack}
             options={{
+              headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? <MarketActiveIcon /> : <MarketInactiveIcon />,
             }}
           />
           <Tab.Screen
-            name="Profile"
-            component={ProfileScreen}
+            name="ProfileTab"
+            component={ProfileStack}
             options={{
+              headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? <ProfileActiveIcon /> : <ProfileInactiveIcon />,
             }}

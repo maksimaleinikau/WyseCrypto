@@ -1,4 +1,5 @@
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Box, Text, Button } from "../components/ui";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../contexts/AuthContext";
 
 export const SignInScreen = () => {
@@ -10,37 +11,24 @@ export const SignInScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>WELCOME</Text>
-      <Text style={styles.subtitle}>Sign in</Text>
-      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+        padding="l"
+        backgroundColor="mainBackground"
+      >
+        <Text variant="headerXL" color="textPrimary" marginBottom="m">
+          WELCOME
+        </Text>
+
+        <Text variant="subtitle" color="textSecondary" marginBottom="xl">
+          Sign in
+        </Text>
+
+        <Button label="Login" onPress={handleSignIn} variant="primary" />
+      </Box>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-  },
-  subtitle: {
-    fontSize: 20,
-  },
-  button: {
-    backgroundColor: "#5EDE99",
-    paddingHorizontal: 40,
-    paddingVertical: 15,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-});

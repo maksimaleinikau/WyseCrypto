@@ -1,45 +1,60 @@
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Box, Text, Button } from "../components/ui";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../contexts/AuthContext";
-export const ProfileScreen = () => {
+import { ProfileStackParamList } from "../navigation/types";
+
+type ProfileScreenProps = NativeStackScreenProps<
+  ProfileStackParamList,
+  "Profile"
+>;
+
+export const ProfileScreen = ({}: ProfileScreenProps) => {
   const { isAuthorized, logout } = useAuth();
-  const handleLogout = () => {
-    console.log("logout pressed");
-    logout();
-  };
+
   return (
-    <View
-      style={{ marginTop: 200, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>ProfileScreen</Text>
-      <View style={styles.contentContainer}>
-        <Text style={styles.status}>
-          Status: {isAuthorized ? "Authorized" : "Not Authorized"}
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box flex={1} backgroundColor="mainBackground" padding="l">
+        <Text variant="headerXL" marginBottom="l" textAlign="center">
+          Profile
         </Text>
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+
+        <Box
+          backgroundColor="cardBackground"
+          padding="m"
+          borderRadius={12}
+          marginBottom="l"
+          alignItems="center"
+        >
+          <Text variant="subtitle" color="textSecondary" marginBottom="s">
+            Status
+          </Text>
+          <Text
+            variant="headerLarge"
+            color={isAuthorized ? "success" : "danger"}
+          >
+            {isAuthorized ? "Authorized" : "Not Authorized"}
+          </Text>
+        </Box>
+
+        <Box gap="m">
+          <Button
+            label="Account Information"
+            onPress={() => console.log(" Account Info Screen")}
+            variant="primary"
+          />
+
+          <Button
+            label="Logout"
+            onPress={() => {
+              console.log("Logout pressed");
+              logout();
+            }}
+            variant="danger"
+            marginTop="s"
+          />
+        </Box>
+      </Box>
+    </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  contentContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  status: {
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: "#5EDE99",
-    paddingHorizontal: 40,
-    paddingVertical: 15,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-});

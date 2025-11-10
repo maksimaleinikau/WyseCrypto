@@ -1,12 +1,6 @@
 import { FlatList } from "react-native";
 import { Box, Text, Badge, ListItem } from "./ui";
-
-export interface Investment {
-  id: string;
-  name: string;
-  amount: number;
-  change: number;
-}
+import { Investment } from "../navigation";
 
 export const mockInvestments: Investment[] = [
   { id: "1", name: "BTC", amount: 50000, change: 2.5 },

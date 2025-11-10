@@ -5,3 +5,4 @@ export { SignInScreen } from "./SignInScreen";
 export { PortfolioScreen } from "./PortfolioScreen";
 export { HoldingDetailsScreen } from "./HoldingDetailsScreen";
 export { SecurityDetailsScreen } from "./SecurityDetailsScreen";
+export { PlaceOrderScreen } from "./PlaceOrderScreen";

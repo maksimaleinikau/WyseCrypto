@@ -1,9 +1,17 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Text } from "../components/ui";
-export const MarketScreen = () => {
+import { SafeAreaView } from "react-native-safe-area-context";
+import { SecuritiesList, mockSecurities } from "../components";
+import { MarketStackParamList } from "../navigation/types";
+
+type MarketScreenProps = NativeStackScreenProps<MarketStackParamList, "Market">;
+
+export const MarketScreen = ({}: MarketScreenProps) => {
   return (
-    <Box>
-      <Text>Market Screen</Text>
-    </Box>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Box flex={1} padding="m">
+        <SecuritiesList data={mockSecurities} />
+      </Box>
+    </SafeAreaView>
   );
 };

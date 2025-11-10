@@ -1,18 +1,20 @@
 import { FlatList } from "react-native";
-import { Box, Text, Badge, ListItem } from "./ui";
+import { Box, Badge, ListItem, Text } from "./ui";
 import { Security } from "../navigation";
 
-export const mockWatchlist: Security[] = [
-  { id: "1", name: "name1", price: 178.5, change24h: 1.2 },
-  { id: "2", name: "name2", price: 2800, change24h: -0.8 },
-  { id: "3", name: "name3", price: 720, change24h: 3.5 },
+export const mockSecurities: Security[] = [
+  { id: "1", name: "Bitcoin", price: 69234.5, change24h: 2.34 },
+  { id: "2", name: "Ethereum", price: 3782.1, change24h: -0.87 },
+  { id: "3", name: "BNB", price: 598.2, change24h: 1.45 },
 ];
 
-export type WatchListProps = {
+type SecuritiesListProps = {
   data?: Security[];
 };
 
-export const WatchList = ({ data = mockWatchlist }: WatchListProps) => {
+export const SecuritiesList = ({
+  data = mockSecurities,
+}: SecuritiesListProps) => {
   return (
     <FlatList
       data={data}

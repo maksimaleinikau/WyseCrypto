@@ -66,7 +66,7 @@ const theme = createTheme({
       color: "textPrimary",
       lineHeight: 22,
     },
-    headerLX: {
+    headerXL: {
       fontSize: 32,
       fontWeight: "700",
       color: "textPrimary",

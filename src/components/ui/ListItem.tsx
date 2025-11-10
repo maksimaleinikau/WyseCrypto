@@ -1,25 +1,22 @@
-import { Pressable } from "react-native";
 import { Card, CardProps } from "./Card";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import { HomeStackParamList } from "../../navigation";
+import { ParamListBase, NavigationProp } from "@react-navigation/native";
 
-type ListItemProps<T, Screen extends keyof HomeStackParamList> = {
+type ListItemProps<T, Screen extends string = string> = {
   item: T;
   to: Screen;
-  params?: (item: T) => HomeStackParamList[Screen];
+  params?: (item: T) => any;
   children: (item: T) => React.ReactNode;
 } & Omit<CardProps, "onPress" | "children">;
 
-export const ListItem = <T, Screen extends keyof HomeStackParamList>({
+export const ListItem = <T, Screen extends string = string>({
   item,
   to,
   params,
   children,
   ...cardProps
 }: ListItemProps<T, Screen>) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handlePress = () => {
     const navParams = params ? params(item) : undefined;
