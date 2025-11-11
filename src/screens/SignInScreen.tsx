@@ -16,10 +16,10 @@ export const SignInScreen = () => {
         flex={1}
         justifyContent="center"
         alignItems="center"
-        padding="l"
+        padding="m"
         backgroundColor="mainBackground"
       >
-        <Text variant="headerXL" color="textPrimary" marginBottom="m">
+        <Text variant="headerLarge" color="textPrimary" marginBottom="m">
           WELCOME
         </Text>
 
