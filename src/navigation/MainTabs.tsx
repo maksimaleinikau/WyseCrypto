@@ -2,17 +2,20 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "../theme";
-import HomeInactiveIcon from "../../assets/TempTabsIcons/HomeInactiveIcon";
-import MarketInactiveIcon from "../../assets/TempTabsIcons/MarketInactiveIcon";
-import ProfileInactiveIcon from "../../assets/TempTabsIcons/ProfileInactiveIcon";
-import HomeActiveIcon from "../../assets/TempTabsIcons/HomeActiveIcon";
-import MarketActiveIcon from "../../assets/TempTabsIcons/MarketActiveIcon";
-import ProfileActiveIcon from "../../assets/TempTabsIcons/ProfileActiveIcon";
+
 import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
-import { Box } from "../components/ui";
+import {
+  BagEmptyIcon,
+  BagIcon,
+  Box,
+  HomeEmptyIcon,
+  HomeIcon,
+  ProfileEmptyIcon,
+} from "../components/ui";
 import { MarketStack } from "./MarketStack";
 import { ProfileStack } from "./ProfileStack";
+import ProfileIcon from "../components/ui/icons/ProfileIcon";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -41,7 +44,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <HomeActiveIcon /> : <HomeInactiveIcon />,
+                focused ? <HomeIcon /> : <HomeEmptyIcon />,
             }}
           />
           <Tab.Screen
@@ -50,7 +53,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <MarketActiveIcon /> : <MarketInactiveIcon />,
+                focused ? <BagIcon /> : <BagEmptyIcon />,
             }}
           />
           <Tab.Screen
@@ -59,7 +62,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <ProfileActiveIcon /> : <ProfileInactiveIcon />,
+                focused ? <ProfileIcon /> : <ProfileEmptyIcon />,
             }}
           />
         </Tab.Navigator>
