@@ -1,15 +1,15 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MarketStackParamList } from "../navigation/types";
-import { useState } from "react";
+import { MarketStackParamList, HomeStackParamList } from "../navigation/types";
+import { useState, useLayoutEffect } from "react";
 import { Pressable } from "react-native";
 import { StarIcon } from "../components/ui";
+import { CommonActions } from "@react-navigation/native";
 
-type SecurityDetailsProps = NativeStackScreenProps<
-  MarketStackParamList,
-  "SecurityDetails"
->;
+type SecurityDetailsProps =
+  | NativeStackScreenProps<MarketStackParamList, "SecurityDetails">
+  | NativeStackScreenProps<HomeStackParamList, "SecurityDetails">;
 
 export const SecurityDetailsScreen = ({
   route,
@@ -18,18 +18,33 @@ export const SecurityDetailsScreen = ({
   const { security } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleBuy = () => {
-    navigation.navigate("PlaceOrder", {
-      side: "BUY",
-      security,
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable onPress={() => setIsFavorite((prev) => !prev)}>
+          <StarIcon color={isFavorite ? "#5EDE99" : "#BEBEBE"} />
+        </Pressable>
+      ),
     });
+  }, [navigation, isFavorite]);
+
+  const handleBuy = () => {
+    navigation.dispatch(
+      CommonActions.navigate({
+        //typization of navigation
+        name: "PlaceOrder",
+        params: { side: "BUY", security },
+      })
+    );
   };
 
   const handleSell = () => {
-    navigation.navigate("PlaceOrder", {
-      side: "SELL",
-      security,
-    });
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "PlaceOrder",
+        params: { side: "SELL", security },
+      })
+    );
   };
 
   return (
@@ -56,22 +71,9 @@ export const SecurityDetailsScreen = ({
               {security.change24h}%
             </Text>
           </Box>
-
-          <Pressable
-            onPress={() => setIsFavorite((prev) => !prev)}
-            hitSlop={12}
-            style={({ pressed }) => [
-              {
-                opacity: pressed ? 0.7 : 1,
-                padding: 8,
-                borderRadius: 8,
-              },
-            ]}
-          >
-            <StarIcon color={isFavorite ? "#5EDE99" : "#BEBEBE"} />
-          </Pressable>
         </Box>
-        <Box flexDirection="row" gap="m" marginTop="xl">
+
+        <Box flexDirection="row" gap="s" marginTop="xl">
           <Button label="BUY" onPress={handleBuy} variant="primary" flex={1} />
           <Button label="SELL" onPress={handleSell} variant="danger" flex={1} />
         </Box>
