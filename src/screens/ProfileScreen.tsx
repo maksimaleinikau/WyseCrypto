@@ -3,6 +3,8 @@ import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../contexts/AuthContext";
 import { ProfileStackParamList } from "../navigation/types";
+import { useState } from "react";
+import { LogoutModal } from "../components/modals";
 
 type ProfileScreenProps = NativeStackScreenProps<
   ProfileStackParamList,
@@ -11,6 +13,12 @@ type ProfileScreenProps = NativeStackScreenProps<
 
 export const ProfileScreen = ({}: ProfileScreenProps) => {
   const { isAuthorized, logout } = useAuth();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleLogout = () => {
+    setModalVisible(false);
+    logout();
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -46,14 +54,16 @@ export const ProfileScreen = ({}: ProfileScreenProps) => {
 
           <Button
             label="Logout"
-            onPress={() => {
-              console.log("Logout pressed");
-              logout();
-            }}
+            onPress={() => setModalVisible(true)}
             variant="danger"
             marginTop="s"
           />
         </Box>
+        <LogoutModal
+          visible={modalVisible}
+          onCancel={() => setModalVisible(false)}
+          onConfirm={handleLogout}
+        />
       </Box>
     </SafeAreaView>
   );

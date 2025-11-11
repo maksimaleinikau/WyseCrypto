@@ -109,6 +109,10 @@ const theme = createTheme({
       fontSize: 12,
       fontWeight: "400",
     },
+    modalText: {
+      fontSize: 16,
+      fontWeight: "400",
+    },
   },
   buttonVariants: {
     defaults: {
