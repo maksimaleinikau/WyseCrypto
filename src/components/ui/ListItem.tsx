@@ -1,13 +1,13 @@
 import { Card, CardProps } from "./Card";
 import { useNavigation } from "@react-navigation/native";
 import { ParamListBase, NavigationProp } from "@react-navigation/native";
-
+import { Pressable } from "react-native";
 type ListItemProps<T, Screen extends string = string> = {
   item: T;
   to: Screen;
   params?: (item: T) => any;
-  children: (item: T) => React.ReactNode;
-} & Omit<CardProps, "onPress" | "children">;
+  children: React.ReactNode;
+} & Omit<CardProps, "children">;
 
 export const ListItem = <T, Screen extends string = string>({
   item,
@@ -24,8 +24,8 @@ export const ListItem = <T, Screen extends string = string>({
   };
 
   return (
-    <Card onPress={handlePress} {...cardProps}>
-      {children(item)}
-    </Card>
+    <Pressable onPress={handlePress}>
+      <Card {...cardProps}>{children}</Card>
+    </Pressable>
   );
 };

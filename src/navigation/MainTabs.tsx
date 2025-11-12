@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "../theme";
-
 import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
 import {
@@ -12,10 +11,10 @@ import {
   HomeEmptyIcon,
   HomeIcon,
   ProfileEmptyIcon,
+  ProfileIcon,
 } from "../components/ui";
 import { MarketStack } from "./MarketStack";
 import { ProfileStack } from "./ProfileStack";
-import ProfileIcon from "../components/ui/icons/ProfileIcon";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 

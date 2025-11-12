@@ -1,6 +1,7 @@
 import { FlatList } from "react-native";
-import { Box, Text, Badge, ListItem } from "./ui";
+import { ListItem, ListItemContent } from "./ui";
 import { Security } from "../navigation";
+import { useCallback } from "react";
 
 export const mockWatchlist: Security[] = [
   { id: "1", name: "name1", price: 178.5, change24h: 1.2 },
@@ -13,35 +14,25 @@ export type WatchListProps = {
 };
 
 export const WatchList = ({ data = mockWatchlist }: WatchListProps) => {
+  const renderItem = useCallback(
+    ({ item }: { item: Security }) => (
+      <ListItem
+        item={item}
+        to="SecurityDetails"
+        params={(i) => ({ security: i })}
+        marginBottom="s"
+      >
+        <ListItemContent item={item} />
+      </ListItem>
+    ),
+    []
+  );
+  const keyExtractor = useCallback((item: Security) => item.id, []);
   return (
     <FlatList
       data={data}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <ListItem
-          item={item}
-          to="SecurityDetails"
-          params={(i) => ({ security: i })}
-          marginBottom="s"
-        >
-          {(item) => (
-            <Box
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box>
-                <Text variant="headerLarge">{item.name}</Text>
-                <Text variant="subtitle">${item.price.toLocaleString()}</Text>
-              </Box>
-              <Badge
-                label={`${item.change24h >= 0 ? "+" : ""}${item.change24h}%`}
-                variant={item.change24h >= 0 ? "success" : "failure"}
-              />
-            </Box>
-          )}
-        </ListItem>
-      )}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
       showsVerticalScrollIndicator={false}
     />
   );

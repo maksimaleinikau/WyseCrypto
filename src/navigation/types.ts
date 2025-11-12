@@ -22,7 +22,7 @@ export type MarketStackParamList = {
 
 export type ProfileStackParamList = {
   Profile: undefined;
-  AccountInfo: undefined;
+  AccountInformation: undefined;
 };
 
 export type MainTabParamList = {

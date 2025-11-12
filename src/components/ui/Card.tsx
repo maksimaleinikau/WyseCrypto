@@ -9,7 +9,7 @@ import {
   color,
   ColorProps,
 } from "@shopify/restyle";
-import { Pressable } from "react-native";
+
 import { Box } from "./Box";
 import { Theme } from "../../theme";
 
@@ -24,18 +24,16 @@ export type CardProps = RestyleProps & {
   onPress?: () => void;
 };
 
-export const Card: React.FC<CardProps> = ({ children, onPress, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ children, ...rest }) => {
   return (
-    <Pressable onPress={onPress}>
-      <Box
-        backgroundColor="cardBackground"
-        flexDirection="row"
-        borderRadius={10}
-        padding="m"
-        {...rest}
-      >
-        {children}
-      </Box>
-    </Pressable>
+    <Box
+      backgroundColor="cardBackground"
+      flexDirection="row"
+      borderRadius={10}
+      padding="m"
+      {...rest}
+    >
+      {children}
+    </Box>
   );
 };

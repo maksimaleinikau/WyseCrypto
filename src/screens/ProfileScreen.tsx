@@ -11,7 +11,7 @@ type ProfileScreenProps = NativeStackScreenProps<
   "Profile"
 >;
 
-export const ProfileScreen = ({}: ProfileScreenProps) => {
+export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const { isAuthorized, logout } = useAuth();
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -27,28 +27,10 @@ export const ProfileScreen = ({}: ProfileScreenProps) => {
           Profile
         </Text>
 
-        <Box
-          backgroundColor="cardBackground"
-          padding="m"
-          borderRadius={12}
-          marginBottom="l"
-          alignItems="center"
-        >
-          <Text variant="subtitle" color="textSecondary" marginBottom="s">
-            Status
-          </Text>
-          <Text
-            variant="headerLarge"
-            color={isAuthorized ? "success" : "danger"}
-          >
-            {isAuthorized ? "Authorized" : "Not Authorized"}
-          </Text>
-        </Box>
-
         <Box gap="m">
           <Button
             label="Account Information"
-            onPress={() => console.log(" Account Info Screen")}
+            onPress={() => navigation.navigate("AccountInformation")}
             variant="primary"
           />
 

@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
-import { Box, Badge, ListItem, Text } from "./ui";
+import { ListItem, ListItemContent } from "./ui";
 import { Security } from "../navigation";
-
+import { useCallback } from "react";
 export const mockSecurities: Security[] = [
   { id: "1", name: "Bitcoin", price: 69234.5, change24h: 2.34 },
   { id: "2", name: "Ethereum", price: 3782.1, change24h: -0.87 },
@@ -15,35 +15,25 @@ type SecuritiesListProps = {
 export const SecuritiesList = ({
   data = mockSecurities,
 }: SecuritiesListProps) => {
+  const renderItem = useCallback(
+    ({ item }: { item: Security }) => (
+      <ListItem
+        item={item}
+        to="SecurityDetails"
+        params={(i) => ({ security: i })}
+        marginBottom="s"
+      >
+        <ListItemContent item={item} />
+      </ListItem>
+    ),
+    []
+  );
+  const keyExtractor = useCallback((item: Security) => item.id, []);
   return (
     <FlatList
       data={data}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <ListItem
-          item={item}
-          to="SecurityDetails"
-          params={(i) => ({ security: i })}
-          marginBottom="s"
-        >
-          {(item) => (
-            <Box
-              flexDirection="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box>
-                <Text variant="headerLarge">{item.name}</Text>
-                <Text variant="subtitle">${item.price.toLocaleString()}</Text>
-              </Box>
-              <Badge
-                label={`${item.change24h >= 0 ? "+" : ""}${item.change24h}%`}
-                variant={item.change24h >= 0 ? "success" : "failure"}
-              />
-            </Box>
-          )}
-        </ListItem>
-      )}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
       showsVerticalScrollIndicator={false}
     />
   );
