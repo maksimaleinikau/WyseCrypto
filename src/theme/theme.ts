@@ -64,9 +64,8 @@ const theme = createTheme({
       fontSize: 12,
       fontWeight: "700",
       color: "textPrimary",
-      lineHeight: 22,
     },
-    headerLX: {
+    headerXL: {
       fontSize: 32,
       fontWeight: "700",
       color: "textPrimary",
@@ -110,6 +109,10 @@ const theme = createTheme({
       fontSize: 12,
       fontWeight: "400",
     },
+    modalText: {
+      fontSize: 16,
+      fontWeight: "400",
+    },
   },
   buttonVariants: {
     defaults: {
@@ -118,7 +121,7 @@ const theme = createTheme({
       justifyContent: "center",
       width: "100%",
       paddingVertical: "sm",
-      marginBottom: "xs",
+      marginBottom: "m",
     },
     primary: {
       backgroundColor: "primary",

@@ -16,7 +16,7 @@ export { default as NotificationIcon } from "./NotificationIcon";
 export { default as PaperNegativeIcon } from "./PaperNegativeIcon";
 export { default as PlusIcon } from "./PlusIcon";
 export { default as ProfileEmptyIcon } from "./ProfileEmptyIcon";
-export { default as Profileicon } from "./ProfileIcon";
+export { default as ProfileIcon } from "./ProfileIcon";
 export { default as StarIcon } from "./StarIcon";
 export { default as TickSquareIcon } from "./TickSquareIcon";
 export { default as TimeCircleIcon } from "./TimeCircleIcon";

@@ -19,15 +19,16 @@ type RestyleProps = SpacingProps<Theme> &
   LayoutProps<Theme> &
   ColorProps<Theme>;
 
-type CardProps = RestyleProps & {
+export type CardProps = RestyleProps & {
   children: React.ReactNode;
   onPress?: () => void;
 };
 
-export const Card: React.FC<CardProps> = ({ children, onPress, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ children, ...rest }) => {
   return (
     <Box
       backgroundColor="cardBackground"
+      flexDirection="row"
       borderRadius={10}
       padding="m"
       {...rest}
