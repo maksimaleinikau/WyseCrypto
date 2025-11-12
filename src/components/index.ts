@@ -1,3 +1,6 @@
-export { InvestmentsList, mockInvestments } from "./InvestmentsList";
+export {
+  InvestmentsList,
+  mockInvestments,
+} from "./Investments/InvestmentsList";
 export { WatchList, mockWatchlist } from "./WatchList";
-export { SecuritiesList, mockSecurities } from "./SecuritiesList";
+export { SecuritiesList, mockSecurities } from "./Securities/SecuritiesList";

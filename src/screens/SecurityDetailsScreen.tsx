@@ -15,7 +15,7 @@ export const SecurityDetailsScreen = ({
   route,
   navigation,
 }: SecurityDetailsProps) => {
-  const { security } = route.params;
+  const { id, title, price, change24h } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
 
   useLayoutEffect(() => {
@@ -33,7 +33,7 @@ export const SecurityDetailsScreen = ({
       CommonActions.navigate({
         //typization of navigation
         name: "PlaceOrder",
-        params: { side: "BUY", security },
+        params: { side: "BUY", title, securityId: id, price, change24h },
       })
     );
   };
@@ -42,7 +42,7 @@ export const SecurityDetailsScreen = ({
     navigation.dispatch(
       CommonActions.navigate({
         name: "PlaceOrder",
-        params: { side: "SELL", security },
+        params: { side: "SELL", title, securityId: id, price, change24h },
       })
     );
   };
@@ -50,30 +50,25 @@ export const SecurityDetailsScreen = ({
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Box flex={1} backgroundColor="mainBackground" padding="l">
-        <Box
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
-          marginBottom="m"
-        >
-          <Box flex={1}>
-            <Text variant="headerXL" color="textPrimary">
-              {security.name}
-            </Text>
-            <Text variant="headerLarge" color="textSecondary">
-              ${security.price.toLocaleString()}
-            </Text>
-            <Text
-              color={security.change24h >= 0 ? "primary" : "danger"}
-              variant="subtitle"
-            >
-              {security.change24h >= 0 ? "+" : ""}
-              {security.change24h}%
-            </Text>
-          </Box>
+        <Box alignItems="center" marginBottom="xl">
+          <Text variant="headerXL" color="textPrimary" marginBottom="s">
+            {title}
+          </Text>
+
+          <Text variant="headerLarge" color="textSecondary" marginBottom="s">
+            ${price.toLocaleString()}
+          </Text>
+
+          <Text
+            variant="subtitle"
+            color={change24h >= 0 ? "primary" : "danger"}
+          >
+            {change24h >= 0 ? "+" : ""}
+            {change24h}%
+          </Text>
         </Box>
 
-        <Box flexDirection="row" gap="s" marginTop="xl">
+        <Box flexDirection="row" gap="s" width="100%">
           <Button label="BUY" onPress={handleBuy} variant="primary" flex={1} />
           <Button label="SELL" onPress={handleSell} variant="danger" flex={1} />
         </Box>

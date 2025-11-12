@@ -1,7 +1,8 @@
 import { FlatList } from "react-native";
-import { ListItem, ListItemContent } from "./ui";
-import { Security } from "../navigation";
+import { Security } from "../../navigation";
 import { useCallback } from "react";
+import { SecuritiesListItem } from "./SecuritiesListItem";
+
 export const mockSecurities: Security[] = [
   { id: "1", name: "Bitcoin", price: 69234.5, change24h: 2.34 },
   { id: "2", name: "Ethereum", price: 3782.1, change24h: -0.87 },
@@ -15,19 +16,10 @@ type SecuritiesListProps = {
 export const SecuritiesList = ({
   data = mockSecurities,
 }: SecuritiesListProps) => {
-  const renderItem = useCallback(
-    ({ item }: { item: Security }) => (
-      <ListItem
-        item={item}
-        to="SecurityDetails"
-        params={(i) => ({ security: i })}
-        marginBottom="s"
-      >
-        <ListItemContent item={item} />
-      </ListItem>
-    ),
-    []
-  );
+  const renderItem = useCallback(({ item }: { item: Security }) => {
+    console.log("ITEM:", item);
+    return <SecuritiesListItem item={item} />;
+  }, []);
   const keyExtractor = useCallback((item: Security) => item.id, []);
   return (
     <FlatList

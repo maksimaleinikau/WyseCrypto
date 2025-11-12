@@ -3,20 +3,36 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 export type HomeStackParamList = {
   HomeMain: undefined;
   Portfolio: undefined;
-  HoldingDetails: { investment: Investment };
-  SecurityDetails: { security: Security };
+  HoldingDetails: { id: string; title: string };
+  SecurityDetails: {
+    id: string;
+    title: string;
+    price: number;
+    change24h: number;
+  };
   PlaceOrder: {
     side: "BUY" | "SELL";
-    security: Security;
+    securityId: string;
+    title: string;
+    price: number;
+    change24h: number;
   };
 };
 
 export type MarketStackParamList = {
   Market: undefined;
-  SecurityDetails: { security: Security };
+  SecurityDetails: {
+    id: string;
+    title: string;
+    price: number;
+    change24h: number;
+  };
   PlaceOrder: {
+    securityId: string;
     side: "BUY" | "SELL";
-    security: Security;
+    title: string;
+    price: number;
+    change24h: number;
   };
 };
 

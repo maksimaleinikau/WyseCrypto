@@ -9,6 +9,5 @@ export { Card, CardProps } from "./Card";
 export { PasswordInput } from "./PasswordInput";
 export { SearchInput } from "./SearchInput";
 export { TextArea } from "./TextArea";
-export { ListItem } from "./ListItem";
-export { ListItemContent } from "./ListItemContent";
+
 export * from "./icons";

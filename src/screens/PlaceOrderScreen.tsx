@@ -8,33 +8,21 @@ type PlaceOrderProps = NativeStackScreenProps<
   "PlaceOrder"
 >;
 export const PlaceOrderScreen = ({ route }: PlaceOrderProps) => {
-  const { side, security } = route.params;
+  const { side, title, price } = route.params;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Box flex={1} backgroundColor="mainBackground" padding="l">
-        <Text variant="headerLarge" marginBottom="m" textAlign="center">
-          {side} {security.name}
+      <Box flex={1} padding="l" justifyContent="center" alignItems="center">
+        <Text variant="headerLarge" marginBottom="m">
+          {side} {title}
         </Text>
-
-        <Box
-          backgroundColor="cardBackground"
-          padding="l"
-          borderRadius={12}
-          marginBottom="l"
-        >
-          <Text variant="subtitle" color="textSecondary">
-            Current Price
-          </Text>
-          <Text variant="headerLarge" color="textPrimary">
-            ${security.price.toLocaleString()}
-          </Text>
-        </Box>
-
+        <Text variant="headerLarge" color="textSecondary" marginBottom="s">
+          ${price.toLocaleString()}
+        </Text>
         <Button
           label={`Confirm ${side}`}
-          onPress={() => alert(`${side} order placed!`)}
           variant={side === "BUY" ? "primary" : "danger"}
+          onPress={() => alert(`${side} order placed!`)}
         />
       </Box>
     </SafeAreaView>

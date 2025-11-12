@@ -28,7 +28,7 @@ export const HomeStack = () => {
         component={HoldingDetailsScreen}
         options={({ route }) => ({
           headerShown: true,
-          headerTitle: route.params.investment.name,
+          headerTitle: route.params.title,
           headerBackTitleVisible: false,
         })}
       />
@@ -37,7 +37,7 @@ export const HomeStack = () => {
         component={SecurityDetailsScreen}
         options={({ route }) => ({
           headerShown: true,
-          headerTitle: route.params.security.name,
+          headerTitle: route.params.title,
           headerBackTitleVisible: false,
         })}
       />
@@ -45,7 +45,7 @@ export const HomeStack = () => {
         name="PlaceOrder"
         component={PlaceOrderScreen}
         options={({ route }) => ({
-          headerTitle: `${route.params.side} ${route.params.security.name}`,
+          headerTitle: `${route.params.side} ${route.params.title}`,
           headerBackTitleVisible: false,
         })}
       />

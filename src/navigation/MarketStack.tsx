@@ -22,7 +22,7 @@ export const MarketStack = () => {
         component={SecurityDetailsScreen}
         options={({ route }) => ({
           headerShown: true,
-          headerTitle: route.params.security.name,
+          headerTitle: route.params.title,
           headerBackTitleVisible: false,
         })}
       />
@@ -30,7 +30,7 @@ export const MarketStack = () => {
         name="PlaceOrder"
         component={PlaceOrderScreen}
         options={({ route }) => ({
-          headerTitle: `${route.params.side} ${route.params.security.name}`,
+          headerTitle: `${route.params.side} ${route.params.title}`,
           headerBackTitleVisible: false,
         })}
       />
