@@ -13,6 +13,7 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
   const handlePress = () => {
     navigation.navigate("SecurityDetails", {
       id: item.id,
+      symbol: item.symbol,
       title: item.name,
       price: item.price,
       change24h: item.change24h,
@@ -32,6 +33,9 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
         >
           <Box>
             <Text variant="headerLarge">{item.name}</Text>
+            <Text variant="subtitle" fontWeight="bold">
+              {item.symbol}
+            </Text>
             <Text variant="subtitle">${item.price.toLocaleString()}</Text>
           </Box>
           <Badge
