@@ -65,8 +65,13 @@ const theme = createTheme({
       fontWeight: "700",
       color: "textPrimary",
     },
-    headerXL: {
+    headerXXL: {
       fontSize: 32,
+      fontWeight: "700",
+      color: "textPrimary",
+    },
+    headerXL: {
+      fontSize: 20,
       fontWeight: "700",
       color: "textPrimary",
     },
@@ -116,6 +121,10 @@ const theme = createTheme({
     filterButton: {
       fontSize: 12,
       fontWeight: "700",
+    },
+    listSubtitle: {
+      fontSize: 16,
+      fontWeight: "400",
     },
   },
   buttonVariants: {

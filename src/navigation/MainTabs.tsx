@@ -5,13 +5,13 @@ import { Theme } from "../theme";
 import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
 import {
-  BagEmptyIcon,
   BagIcon,
+  BagIconInactive,
   Box,
-  HomeEmptyIcon,
   HomeIcon,
-  ProfileEmptyIcon,
+  HomeIconInactive,
   ProfileIcon,
+  ProfileIconInactive,
 } from "../components/ui";
 import { MarketStack } from "./MarketStack";
 import { ProfileStack } from "./ProfileStack";
@@ -27,13 +27,13 @@ export const MainTabs = () => {
           screenOptions={{
             tabBarActiveTintColor: theme.colors.primary,
             tabBarStyle: {
-              paddingHorizontal: theme.spacing.xl,
               paddingTop: theme.spacing.sm2,
+              paddingHorizontal: theme.spacing.xl,
             },
             tabBarLabelStyle: {
               fontSize: 12,
               fontWeight: "600",
-              marginTop: theme.spacing.s,
+              marginTop: theme.spacing.xs,
             },
           }}
         >
@@ -43,7 +43,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <HomeIcon /> : <HomeEmptyIcon />,
+                focused ? <HomeIcon /> : <HomeIconInactive />,
             }}
           />
           <Tab.Screen
@@ -52,7 +52,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <BagIcon /> : <BagEmptyIcon />,
+                focused ? <BagIcon /> : <BagIconInactive />,
             }}
           />
           <Tab.Screen
@@ -61,7 +61,7 @@ export const MainTabs = () => {
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <ProfileIcon /> : <ProfileEmptyIcon />,
+                focused ? <ProfileIcon /> : <ProfileIconInactive />,
             }}
           />
         </Tab.Navigator>
