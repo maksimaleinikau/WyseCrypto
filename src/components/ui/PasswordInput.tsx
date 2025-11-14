@@ -1,27 +1,30 @@
-import { TouchableOpacity } from "react-native";
-import { Input, InputProps } from "./Input";
 import { useState } from "react";
+import { FormInput } from "../forms/FormInput";
+import { Pressable } from "react-native";
 import { EyeIcon, EyeOffIcon } from "./icons";
 
-export interface PasswordInputProps
-  extends Omit<InputProps, "rightIcon" | "secureTextEntry"> {}
+type PasswordInputProps = {
+  name: string;
+  placeholder?: string;
+};
 
-export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-  const rightIcon = (
-    <TouchableOpacity onPress={togglePasswordVisibility}>
-      {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-    </TouchableOpacity>
-  );
+export const PasswordInput = ({
+  name,
+  placeholder = "Password",
+}: PasswordInputProps) => {
+  const [secure, setSecure] = useState(true);
 
   return (
-    <Input
-      {...props}
-      secureTextEntry={!isPasswordVisible}
-      rightIcon={rightIcon}
+    <FormInput
+      name={name}
+      placeholder={placeholder}
+      secureTextEntry={secure}
+      onValueChange={(text: string) => {}} //temp
+      rightIcon={
+        <Pressable onPress={() => setSecure(!secure)}>
+          {secure ? <EyeOffIcon /> : <EyeIcon />}
+        </Pressable>
+      }
     />
   );
 };

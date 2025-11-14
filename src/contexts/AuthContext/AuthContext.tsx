@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { AuthContextType } from "./AuthContext.types";
+import { AuthContextType, User } from "./AuthContext.types";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -9,15 +9,24 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
-  const login = () => {
-    setIsAuthorized(true);
+  const login = (email: string, password: string) => {
+    const mockUser: User = {
+      email: "maxAleinikov@gmail.com",
+      fullName: "Max Aleinikov",
+      phoneNumber: "+375 29 111111",
+    };
+    setUser(mockUser);
+    setIsAuthorized(false);
   };
   const logout = () => {
-    setIsAuthorized(false);
+    setUser(null);
+    setIsAuthorized(true);
   };
   const value: AuthContextType = {
     isAuthorized,
+    user,
     login,
     logout,
   };
