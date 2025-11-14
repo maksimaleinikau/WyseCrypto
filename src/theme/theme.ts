@@ -113,6 +113,10 @@ const theme = createTheme({
       fontSize: 16,
       fontWeight: "400",
     },
+    filterButton: {
+      fontSize: 12,
+      fontWeight: "700",
+    },
   },
   buttonVariants: {
     defaults: {
@@ -121,6 +125,7 @@ const theme = createTheme({
       justifyContent: "center",
       width: "100%",
       paddingVertical: "sm",
+      paddingHorizontal: "sm2",
       marginBottom: "m",
     },
     primary: {
@@ -142,6 +147,18 @@ const theme = createTheme({
       borderWidth: 1,
       borderColor: "buttonDisabled",
       color: "textTertiary",
+    },
+    filterActive: {
+      backgroundColor: "primary",
+      color: "textInverted",
+      borderRadius: 8,
+    },
+    filterInactive: {
+      backgroundColor: "mainBackground",
+      color: "primary",
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: "primary",
     },
   },
   inputVariants: {
