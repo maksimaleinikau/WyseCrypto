@@ -6,7 +6,7 @@ import { MarketStackParamList } from "../navigation/types";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { useMemo, useDeferredValue } from "react";
 
-type MarketScreenProps = NativeStackScreenProps<MarketStackParamList, "Market">;
+type MarketScreenProps = NativeStackScreenProps<MarketStackParamList, "MarketScreen">;
 
 export const MarketScreen = ({}: MarketScreenProps) => {
   const methods = useForm();

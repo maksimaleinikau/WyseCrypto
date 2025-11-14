@@ -20,7 +20,7 @@ export type HomeStackParamList = {
 };
 
 export type MarketStackParamList = {
-  Market: undefined;
+  MarketScreen: undefined;
   SecurityDetails: {
     id: string;
     title: string;
@@ -37,14 +37,14 @@ export type MarketStackParamList = {
 };
 
 export type ProfileStackParamList = {
-  Profile: undefined;
+  ProfileScreen: undefined;
   AccountInformation: undefined;
 };
 
 export type MainTabParamList = {
-  HomeTab: NavigatorScreenParams<HomeStackParamList>;
-  MarketTab: NavigatorScreenParams<MarketStackParamList>;
-  ProfileTab: NavigatorScreenParams<ProfileStackParamList>;
+  Home: NavigatorScreenParams<HomeStackParamList>;
+  Market: NavigatorScreenParams<MarketStackParamList>;
+  Profile: NavigatorScreenParams<ProfileStackParamList>;
 };
 
 export type RootStackParamList = {

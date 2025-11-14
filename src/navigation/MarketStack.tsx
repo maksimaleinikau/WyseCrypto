@@ -13,7 +13,7 @@ export const MarketStack = () => {
       }}
     >
       <Stack.Screen
-        name="Market"
+        name="MarketScreen"
         component={MarketScreen}
         options={{ headerShown: false }}
       />

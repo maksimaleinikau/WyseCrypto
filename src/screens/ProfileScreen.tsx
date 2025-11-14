@@ -8,7 +8,7 @@ import { LogoutModal } from "../components/modals";
 
 type ProfileScreenProps = NativeStackScreenProps<
   ProfileStackParamList,
-  "Profile"
+  "ProfileScreen"
 >;
 
 export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {

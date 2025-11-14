@@ -38,7 +38,7 @@ export const MainTabs = () => {
           }}
         >
           <Tab.Screen
-            name="HomeTab"
+            name="Home"
             component={HomeStack}
             options={{
               headerShown: false,
@@ -47,7 +47,7 @@ export const MainTabs = () => {
             }}
           />
           <Tab.Screen
-            name="MarketTab"
+            name="Market"
             component={MarketStack}
             options={{
               headerShown: false,
@@ -56,7 +56,7 @@ export const MainTabs = () => {
             }}
           />
           <Tab.Screen
-            name="ProfileTab"
+            name="Profile"
             component={ProfileStack}
             options={{
               headerShown: false,
