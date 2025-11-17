@@ -12,11 +12,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = () => {
     setIsAuthorized(true);
-    console.log("logged in");
   };
   const logout = () => {
     setIsAuthorized(false);
-    console.log("logged out");
   };
   const value: AuthContextType = {
     isAuthorized,

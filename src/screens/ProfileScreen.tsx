@@ -1,18 +1,13 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../contexts/AuthContext";
-import { ProfileStackParamList } from "../navigation/types";
 import { useState } from "react";
 import { LogoutModal } from "../components/modals";
+import { useAppNavigation } from "../hooks/useAppNavigation";
 
-type ProfileScreenProps = NativeStackScreenProps<
-  ProfileStackParamList,
-  "Profile"
->;
-
-export const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
-  const { isAuthorized, logout } = useAuth();
+export const ProfileScreen = () => {
+  const navigation = useAppNavigation();
+  const { logout } = useAuth();
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleLogout = () => {

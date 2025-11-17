@@ -2,19 +2,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "../theme";
-import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
 import {
-  BagEmptyIcon,
   BagIcon,
+  BagIconInactive,
   Box,
-  HomeEmptyIcon,
   HomeIcon,
-  ProfileEmptyIcon,
+  HomeIconInactive,
   ProfileIcon,
+  ProfileIconInactive,
 } from "../components/ui";
-import { MarketStack } from "./MarketStack";
-import { ProfileStack } from "./ProfileStack";
+import { HomeScreen, MarketScreen, ProfileScreen } from "../screens";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -27,41 +25,41 @@ export const MainTabs = () => {
           screenOptions={{
             tabBarActiveTintColor: theme.colors.primary,
             tabBarStyle: {
-              paddingHorizontal: theme.spacing.xl,
               paddingTop: theme.spacing.sm2,
+              paddingHorizontal: theme.spacing.xl,
             },
             tabBarLabelStyle: {
               fontSize: 12,
               fontWeight: "600",
-              marginTop: theme.spacing.s,
+              marginTop: theme.spacing.xs,
             },
           }}
         >
           <Tab.Screen
-            name="HomeTab"
-            component={HomeStack}
+            name="Home"
+            component={HomeScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <HomeIcon /> : <HomeEmptyIcon />,
+                focused ? <HomeIcon /> : <HomeIconInactive />,
             }}
           />
           <Tab.Screen
-            name="MarketTab"
-            component={MarketStack}
+            name="Market"
+            component={MarketScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <BagIcon /> : <BagEmptyIcon />,
+                focused ? <BagIcon /> : <BagIconInactive />,
             }}
           />
           <Tab.Screen
-            name="ProfileTab"
-            component={ProfileStack}
+            name="Profile"
+            component={ProfileScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
-                focused ? <ProfileIcon /> : <ProfileEmptyIcon />,
+                focused ? <ProfileIcon /> : <ProfileIconInactive />,
             }}
           />
         </Tab.Navigator>

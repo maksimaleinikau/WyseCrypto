@@ -6,7 +6,6 @@ export const SignInScreen = () => {
   const { login } = useAuth();
 
   const handleSignIn = () => {
-    console.log("SignIn pressed");
     login();
   };
 

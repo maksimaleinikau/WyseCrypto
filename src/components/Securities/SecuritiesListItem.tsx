@@ -13,6 +13,7 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
   const handlePress = () => {
     navigation.navigate("SecurityDetails", {
       id: item.id,
+      symbol: item.symbol,
       title: item.name,
       price: item.price,
       change24h: item.change24h,
@@ -29,15 +30,33 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
           flexDirection="row"
           justifyContent="space-between"
           alignItems="center"
+          flex={1}
         >
-          <Box>
-            <Text variant="headerLarge">{item.name}</Text>
-            <Text variant="subtitle">${item.price.toLocaleString()}</Text>
+          <Box flexDirection="row" alignItems="center" gap="m" flex={1}>
+            <Box
+              width={40}
+              height={40}
+              backgroundColor="mainBackground"
+              borderRadius={10}
+            />
+
+            <Box>
+              <Text variant="headerXL" marginBottom="xs">
+                {item.name}
+              </Text>
+              <Text variant="listSubtitle">{item.symbol}</Text>
+            </Box>
           </Box>
-          <Badge
-            label={changeLabel}
-            variant={isPositive ? "success" : "failure"}
-          />
+
+          <Box alignItems="flex-end">
+            <Text variant="headerLarge" marginBottom="xs">
+              ${item.price.toLocaleString()}
+            </Text>
+            <Badge
+              label={changeLabel}
+              variant={isPositive ? "success" : "failure"}
+            />
+          </Box>
         </Box>
       </Card>
     </Pressable>

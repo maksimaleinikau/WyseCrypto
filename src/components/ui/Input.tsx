@@ -46,7 +46,6 @@ export const Input: React.FC<InputProps> = ({
   variant = "default",
   label,
   onValueChange,
-  onChangeText,
   placeholder,
   errorMessage,
   leftIcon,
@@ -75,9 +74,7 @@ export const Input: React.FC<InputProps> = ({
       : theme.colors.inputPlaceholder;
 
   const handleChangeText = (text: string) => {
-    console.log("input value", text);
     onValueChange?.(text);
-    onChangeText?.(text);
   };
 
   const handleFocus = () => {
@@ -94,13 +91,7 @@ export const Input: React.FC<InputProps> = ({
       {label && <Text variant="inputLabel">{label}</Text>}
       <Box position="relative">
         {hasLeftIcon && (
-          <Box
-            position="absolute"
-            left={12}
-            top={12}
-            zIndex={1}
-            backgroundColor="blue"
-          >
+          <Box position="absolute" left={12} top={12} zIndex={1}>
             {leftIcon}
           </Box>
         )}
@@ -112,7 +103,6 @@ export const Input: React.FC<InputProps> = ({
 
         <TextInput
           {...props}
-          {...rest}
           onChangeText={handleChangeText}
           onFocus={handleFocus}
           onBlur={handleBlur}

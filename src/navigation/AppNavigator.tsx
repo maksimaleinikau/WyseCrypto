@@ -2,42 +2,27 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAuth } from "../contexts/AuthContext";
 import { SignInScreen } from "../screens";
-import { MainTabs } from "./MainTabs";
-import { RootStackParamList } from "./types";
+import { RootParamList } from "./types";
+import { AppStack } from "./AppStack";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootParamList>();
 
 export const AppNavigator = () => {
   const { isAuthorized } = useAuth();
 
   return (
     <NavigationContainer>
-      {isAuthorized ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="MainApp"
-            component={MainTabs}
-            options={{
-              title: "Main App",
-              headerBackVisible: false,
-              headerLeft: () => null,
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      ) : (
-        <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {isAuthorized ? (
+          <Stack.Screen name="MainTabs" component={AppStack} />
+        ) : (
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
-            options={{
-              headerShown: false,
-              gestureEnabled: false,
-              animation: "fade",
-            }}
+            options={{ gestureEnabled: false, animation: "fade" }}
           />
-        </Stack.Navigator>
-      )}
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

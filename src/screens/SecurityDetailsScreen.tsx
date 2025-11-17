@@ -1,20 +1,19 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MarketStackParamList, HomeStackParamList } from "../navigation/types";
 import { useState, useLayoutEffect } from "react";
 import { Pressable } from "react-native";
 import { StarIcon } from "../components/ui";
-import { CommonActions } from "@react-navigation/native";
+import { RootParamList } from "../navigation";
+import { useAppNavigation } from "../hooks/useAppNavigation";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type SecurityDetailsProps =
-  | NativeStackScreenProps<MarketStackParamList, "SecurityDetails">
-  | NativeStackScreenProps<HomeStackParamList, "SecurityDetails">;
+type SecurityDetailsRouteProps = NativeStackScreenProps<
+  RootParamList,
+  "SecurityDetails"
+>;
 
-export const SecurityDetailsScreen = ({
-  route,
-  navigation,
-}: SecurityDetailsProps) => {
+export const SecurityDetailsScreen = ({ route }: SecurityDetailsRouteProps) => {
+  const navigation = useAppNavigation();
   const { id, title, price, change24h } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -29,22 +28,23 @@ export const SecurityDetailsScreen = ({
   }, [navigation, isFavorite]);
 
   const handleBuy = () => {
-    navigation.dispatch(
-      CommonActions.navigate({
-        //typization of navigation
-        name: "PlaceOrder",
-        params: { side: "BUY", title, securityId: id, price, change24h },
-      })
-    );
+    navigation.navigate("PlaceOrder", {
+      side: "BUY",
+      securityId: id,
+      title,
+      price,
+      change24h,
+    });
   };
 
   const handleSell = () => {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "PlaceOrder",
-        params: { side: "SELL", title, securityId: id, price, change24h },
-      })
-    );
+    navigation.navigate("PlaceOrder", {
+      side: "SELL",
+      securityId: id,
+      title,
+      price,
+      change24h,
+    });
   };
 
   return (
