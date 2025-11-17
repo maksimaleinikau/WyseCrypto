@@ -1,7 +1,4 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Box, Button } from "../components/ui";
-import { useNavigation } from "@react-navigation/native";
-import { HomeStackParamList } from "../navigation";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   InvestmentsList,
@@ -9,14 +6,10 @@ import {
   mockWatchlist,
   WatchList,
 } from "../components";
-
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  HomeStackParamList,
-  "HomeMain"
->;
+import { useAppNavigation } from "../hooks/useAppNavigation";
 
 export const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useAppNavigation();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

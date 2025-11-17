@@ -1,14 +1,10 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, LoadingIndicator, SearchInput } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SecuritiesList, mockSecurities } from "../components";
-import { MarketStackParamList } from "../navigation/types";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { useMemo, useDeferredValue } from "react";
 
-type MarketScreenProps = NativeStackScreenProps<MarketStackParamList, "MarketScreen">;
-
-export const MarketScreen = ({}: MarketScreenProps) => {
+export const MarketScreen = () => {
   const methods = useForm();
   const search = useWatch({ control: methods.control, name: "search" }) || "";
 

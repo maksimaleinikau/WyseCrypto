@@ -1,13 +1,11 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MarketStackParamList } from "../navigation";
+import { RootParamList } from "../navigation";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-type PlaceOrderProps = NativeStackScreenProps<
-  MarketStackParamList,
-  "PlaceOrder"
->;
-export const PlaceOrderScreen = ({ route }: PlaceOrderProps) => {
+type PlaceOrderRouteProp = NativeStackScreenProps<RootParamList, "PlaceOrder">;
+
+export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
   const { side, title, price } = route.params;
 
   return (

@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "../theme";
-import { HomeStack } from "./HomeStack";
 import { MainTabParamList } from "./types";
 import {
   BagIcon,
@@ -13,8 +12,7 @@ import {
   ProfileIcon,
   ProfileIconInactive,
 } from "../components/ui";
-import { MarketStack } from "./MarketStack";
-import { ProfileStack } from "./ProfileStack";
+import { HomeScreen, MarketScreen, ProfileScreen } from "../screens";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -39,7 +37,7 @@ export const MainTabs = () => {
         >
           <Tab.Screen
             name="Home"
-            component={HomeStack}
+            component={HomeScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
@@ -48,7 +46,7 @@ export const MainTabs = () => {
           />
           <Tab.Screen
             name="Market"
-            component={MarketStack}
+            component={MarketScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
@@ -57,7 +55,7 @@ export const MainTabs = () => {
           />
           <Tab.Screen
             name="Profile"
-            component={ProfileStack}
+            component={ProfileScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ focused }) =>
