@@ -1,6 +1,5 @@
 export type RootParamList = {
   SignIn: undefined;
-  Registration: undefined;
   MainTabs: undefined;
 
   SecurityDetails: {
@@ -20,7 +19,6 @@ export type RootParamList = {
   Portfolio: undefined;
   HoldingDetails: { id: string; title: string };
   AccountInformation: undefined;
-  EditProfile: undefined;
 };
 
 export type MainTabParamList = {
