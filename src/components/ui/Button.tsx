@@ -37,22 +37,31 @@ const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
 type Props = RestyleProps & {
   onPress: () => void;
   label: string;
-  variant?:
-    | "primary"
-    | "secondary"
-    | "danger"
-    | "disabled"
-    | "filterActive"
-    | "filterInactive";
+  variant?: "primary" | "secondary" | "danger" | "disabled";
+  disabled?: boolean;
 };
 
-const Button = ({ onPress, label, variant = "primary", ...rest }: Props) => {
+const Button = ({
+  onPress,
+  label,
+  variant = "primary",
+  disabled = false,
+  ...rest
+}: Props) => {
   const theme = useTheme<Theme>();
-  const props = useRestyle(restyleFunctions, { variant, ...rest } as any);
-  const textColor = theme.buttonVariants[variant]?.color ?? "textPrimary";
+  const buttonVariant = disabled ? "disabled" : variant;
+  const props = useRestyle(restyleFunctions, {
+    variant: buttonVariant,
+    ...rest,
+  } as any);
+  const textColor = theme.buttonVariants[buttonVariant]?.color ?? "textPrimary";
 
   return (
-    <TouchableOpacity onPress={onPress} {...props}>
+    <TouchableOpacity
+      onPress={disabled ? undefined : onPress}
+      disabled={disabled}
+      {...props}
+    >
       <Text variant="button" color={textColor}>
         {label}
       </Text>

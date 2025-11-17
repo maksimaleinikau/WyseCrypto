@@ -4,17 +4,25 @@ import { useAuth } from "../contexts/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormInput } from "../components/forms/FormInput";
 import { PasswordInput } from "../components/ui";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { singInShema } from "../components/forms/validations/authShema";
 
 type SignInFormProps = { email: string; password: string };
 
 export const SignInScreen = () => {
   const { login } = useAuth();
   const methods = useForm<SignInFormProps>({
+    resolver: yupResolver(singInShema),
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
     },
   });
+  const {
+    handleSubmit,
+    formState: { isValid, isSubmitting },
+  } = methods;
 
   const handleSignIn = (data: SignInFormProps) => {
     console.log(data.email, data.password);
@@ -52,9 +60,10 @@ export const SignInScreen = () => {
           </Box>
 
           <Button
-            label="Sign In"
-            onPress={methods.handleSubmit(handleSignIn)}
+            label={isSubmitting ? "Entry..." : "Sign In"}
+            onPress={handleSubmit(handleSignIn)}
             variant="primary"
+            disabled={!isValid}
           />
         </FormProvider>
       </Box>

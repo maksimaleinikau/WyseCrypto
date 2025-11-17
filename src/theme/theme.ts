@@ -157,18 +157,6 @@ const theme = createTheme({
       borderColor: "buttonDisabled",
       color: "textTertiary",
     },
-    filterActive: {
-      backgroundColor: "primary",
-      color: "textInverted",
-      borderRadius: 8,
-    },
-    filterInactive: {
-      backgroundColor: "mainBackground",
-      color: "primary",
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: "primary",
-    },
   },
   inputVariants: {
     defaults: {
