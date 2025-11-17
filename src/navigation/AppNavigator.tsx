@@ -14,7 +14,7 @@ export const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthorized ? (
-          <Stack.Screen name="MainTabs" component={AppStack} />
+          <Stack.Screen name="MainApp" component={AppStack} />
         ) : (
           <Stack.Screen
             name="SignIn"

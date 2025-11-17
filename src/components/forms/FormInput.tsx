@@ -5,7 +5,7 @@ type FormInputProps = InputProps & {
   name: string;
 };
 
-export const FormInput = ({ name, ...rest }: FormInputProps) => {
+export const FormInput = ({ name, ...inputProps }: FormInputProps) => {
   const { control } = useFormContext();
   const {
     field: { value, onChange, onBlur },
@@ -14,7 +14,7 @@ export const FormInput = ({ name, ...rest }: FormInputProps) => {
 
   return (
     <Input
-      {...rest}
+      {...inputProps}
       value={value || ""}
       onValueChange={onChange}
       onBlur={onBlur}

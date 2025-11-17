@@ -13,16 +13,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = (email: string, password: string) => {
     const mockUser: User = {
-      email: "maxAleinikov@gmail.com",
+      email,
       fullName: "Max Aleinikov",
       phoneNumber: "+375 29 111111",
+      password,
     };
     setUser(mockUser);
-    setIsAuthorized(false);
+    setIsAuthorized(true);
   };
   const logout = () => {
     setUser(null);
-    setIsAuthorized(true);
+    setIsAuthorized(false);
   };
   const value: AuthContextType = {
     isAuthorized,

@@ -1,6 +1,6 @@
 export type RootParamList = {
   SignIn: undefined;
-  MainTabs: undefined;
+  MainApp: undefined;
 
   SecurityDetails: {
     id: string;

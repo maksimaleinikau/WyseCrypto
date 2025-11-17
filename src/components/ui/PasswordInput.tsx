@@ -6,11 +6,13 @@ import { EyeIcon, EyeOffIcon } from "./icons";
 type PasswordInputProps = {
   name: string;
   placeholder?: string;
+  label?: string;
 };
 
 export const PasswordInput = ({
   name,
   placeholder = "Password",
+  label,
 }: PasswordInputProps) => {
   const [secure, setSecure] = useState(true);
 
@@ -18,8 +20,8 @@ export const PasswordInput = ({
     <FormInput
       name={name}
       placeholder={placeholder}
+      label={label}
       secureTextEntry={secure}
-      onValueChange={(text: string) => {}} //temp
       rightIcon={
         <Pressable onPress={() => setSecure(!secure)}>
           {secure ? <EyeOffIcon /> : <EyeIcon />}
