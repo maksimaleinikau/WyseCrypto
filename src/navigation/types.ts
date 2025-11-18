@@ -1,6 +1,7 @@
 export type RootParamList = {
-  SignIn: undefined;
+  Auth: undefined;
   MainApp: undefined;
+  MainTabs: undefined;
 
   SecurityDetails: {
     id: string;
@@ -25,6 +26,10 @@ export type MainTabParamList = {
   Home: undefined;
   Market: undefined;
   Profile: undefined;
+};
+export type AuthStackParamlist = {
+  SignIn: undefined;
+  SignUp: undefined;
 };
 export interface Investment {
   id: string;

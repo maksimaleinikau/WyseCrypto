@@ -1,7 +1,7 @@
 export interface AuthContextType {
   isAuthorized: boolean;
   user: User | null;
-  login: (email: string, password: string) => void;
+  login: (userData: User) => void;
   logout: () => void;
 }
 

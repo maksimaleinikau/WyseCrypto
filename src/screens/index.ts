@@ -2,6 +2,7 @@ export { ProfileScreen } from "./ProfileScreen";
 export { MarketScreen } from "./MarketScreen";
 export { HomeScreen } from "./HomeScreen";
 export { SignInScreen } from "./SignInScreen";
+export { SignUpScreen } from "./SignUpScreen";
 export { PortfolioScreen } from "./PortfolioScreen";
 export { HoldingDetailsScreen } from "./HoldingDetailsScreen";
 export { SecurityDetailsScreen } from "./SecurityDetailsScreen";

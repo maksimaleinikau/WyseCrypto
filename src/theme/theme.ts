@@ -1,5 +1,6 @@
 import { createTheme } from "@shopify/restyle";
 import { palette } from "./palette";
+import { Checkbox } from "../components/ui";
 
 const theme = createTheme({
   spacing: {
@@ -9,9 +10,11 @@ const theme = createTheme({
     sm: 11,
     sm2: 12,
     m: 16,
+    m2: 19,
     l: 24,
     xl: 32,
     "2xl": 48,
+    "4xl": 72,
   },
 
   colors: {
@@ -125,6 +128,11 @@ const theme = createTheme({
     listSubtitle: {
       fontSize: 16,
       fontWeight: "400",
+    },
+    checkBoxLabel: {
+      fontSize: 12,
+      fontWeight: "600",
+      lineHeight: 18,
     },
   },
   buttonVariants: {
