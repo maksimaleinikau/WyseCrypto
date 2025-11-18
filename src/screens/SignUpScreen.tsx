@@ -22,7 +22,7 @@ export const SignUpScreen = () => {
   const { login } = useAuth();
 
   const methods = useForm<SignUpFormData>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: yupResolver(signUpSchema),
     defaultValues: {
       fullName: "",
@@ -39,8 +39,15 @@ export const SignUpScreen = () => {
     watch,
     setValue,
     trigger,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = methods;
+
+  const step1HasErrors = !!errors.fullName || !!errors.phoneNumber;
+  const step2HasErrors =
+    !!errors.email ||
+    !!errors.password ||
+    !!errors.confirmPassword ||
+    !!errors.terms;
 
   const terms = watch("terms");
 
@@ -130,6 +137,7 @@ export const SignUpScreen = () => {
                     label="Continue"
                     onPress={handleContinue}
                     variant="primary"
+                    disabled={step1HasErrors}
                   />
                   <Button
                     label="Skip"
@@ -173,6 +181,7 @@ export const SignUpScreen = () => {
                     label="Create Account"
                     onPress={handleCreateAccount}
                     variant="primary"
+                    disabled={step2HasErrors}
                   />
                   <Button
                     label="Back"
