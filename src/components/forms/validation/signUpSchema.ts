@@ -9,7 +9,7 @@ const baseSchema = {
   fullName: yup
     .string()
     .optional()
-    .default("") //without this yupResolver --> string | undefined
+    .defined()
     .trim()
     .matches(FULLNAME_REGEX, "Invalid name format"),
   phoneNumber: yup.string().optional().default("").trim().matches(PHONE_REGEX, {
