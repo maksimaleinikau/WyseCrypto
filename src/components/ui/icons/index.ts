@@ -28,3 +28,4 @@ export { default as RadioButtonIcon } from "./RadioButtonIcon";
 export { default as RadioButtonActiveIcon } from "./RadioButtonActiveIcon";
 export { default as UploadIcon } from "./UploadIcon";
 export { default as ArrowUpRightIcon } from "./ArrowUpRightIcon";
+export { default as LogoIcon } from "./LogoIcon";

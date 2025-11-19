@@ -1,5 +1,6 @@
 import { createTheme } from "@shopify/restyle";
 import { palette } from "./palette";
+import { Checkbox } from "../components/ui";
 
 const theme = createTheme({
   spacing: {
@@ -9,9 +10,11 @@ const theme = createTheme({
     sm: 11,
     sm2: 12,
     m: 16,
+    m2: 19,
     l: 24,
     xl: 32,
     "2xl": 48,
+    "4xl": 72,
   },
 
   colors: {
@@ -126,6 +129,11 @@ const theme = createTheme({
       fontSize: 16,
       fontWeight: "400",
     },
+    checkBoxLabel: {
+      fontSize: 12,
+      fontWeight: "600",
+      lineHeight: 18,
+    },
   },
   buttonVariants: {
     defaults: {
@@ -156,18 +164,6 @@ const theme = createTheme({
       borderWidth: 1,
       borderColor: "buttonDisabled",
       color: "textTertiary",
-    },
-    filterActive: {
-      backgroundColor: "primary",
-      color: "textInverted",
-      borderRadius: 8,
-    },
-    filterInactive: {
-      backgroundColor: "mainBackground",
-      color: "primary",
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: "primary",
     },
   },
   inputVariants: {

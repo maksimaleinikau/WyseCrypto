@@ -1,23 +1,27 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { AuthContextType } from "./AuthContext.types";
+import { AuthContextType, User } from "./AuthContext.types";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
-  const login = () => {
+  const login = (userData: User) => {
+    setUser(userData);
     setIsAuthorized(true);
   };
   const logout = () => {
+    setUser(null);
     setIsAuthorized(false);
   };
+
   const value: AuthContextType = {
     isAuthorized,
+    user,
     login,
     logout,
   };

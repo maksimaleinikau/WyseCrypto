@@ -1,27 +1,38 @@
-import { TouchableOpacity } from "react-native";
-import { Input, InputProps } from "./Input";
 import { useState } from "react";
+import { FormInput } from "../forms/FormInput";
+import { Pressable } from "react-native";
 import { EyeIcon, EyeOffIcon } from "./icons";
 
-export interface PasswordInputProps
-  extends Omit<InputProps, "rightIcon" | "secureTextEntry"> {}
+type PasswordInputProps = {
+  name: string;
+  placeholder?: string;
+  label?: string;
+  autoComplete?: "password" | "password-new" | "off";
+  textContentType?: "password" | "newPassword" | "emailAddress"; //IOS
+};
 
-export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-  const rightIcon = (
-    <TouchableOpacity onPress={togglePasswordVisibility}>
-      {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
-    </TouchableOpacity>
-  );
+export const PasswordInput = ({
+  name,
+  placeholder = "Password",
+  label,
+  autoComplete = "password-new",
+  textContentType = "newPassword",
+}: PasswordInputProps) => {
+  const [secure, setSecure] = useState(true);
 
   return (
-    <Input
-      {...props}
-      secureTextEntry={!isPasswordVisible}
-      rightIcon={rightIcon}
+    <FormInput
+      name={name}
+      placeholder={placeholder}
+      label={label}
+      secureTextEntry={secure}
+      autoComplete={autoComplete}
+      textContentType={textContentType}
+      rightIcon={
+        <Pressable onPress={() => setSecure(!secure)}>
+          {secure ? <EyeOffIcon /> : <EyeIcon />}
+        </Pressable>
+      }
     />
   );
 };
