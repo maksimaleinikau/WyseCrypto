@@ -9,6 +9,8 @@ export interface CheckboxProps {
   onPress?: () => void;
   disabled?: boolean;
   size?: number;
+  label?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -16,6 +18,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   onPress,
   disabled = false,
   size = 24,
+  label,
+  children,
 }) => {
   const theme = useTheme<Theme>();
 
@@ -43,16 +47,11 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         marginTop="xs"
       />
 
-      <Box flex={1} marginLeft="s">
-        <Text variant="checkBoxLabel">
-          I agree to the{" "}
-          <Text color="textFourtiary">
-            Terms and Conditions, Privacy Policy
-          </Text>
-          <Text> and </Text>
-          <Text color="textFourtiary">Content Policy</Text>
-        </Text>
-      </Box>
+      {(label || children) && (
+        <Box flex={1} marginLeft="s">
+          {label ? <Text variant="checkBoxLabel">{label}</Text> : children}
+        </Box>
+      )}
     </TouchableOpacity>
   );
 };

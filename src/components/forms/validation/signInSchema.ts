@@ -1,21 +1,19 @@
 import * as yup from "yup";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../../../constants/validation";
 
 export const signInSchema = yup.object({
   email: yup
     .string()
     .required("Email is required")
     .email("Invalid email format")
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Enter a valid email address"
-    ),
+    .matches(EMAIL_REGEX, "Enter a valid email address"),
 
   password: yup
     .string()
     .required("Password is required")
     .min(8, "Minimum 8 symbols")
-    .matches(/[A-Z]/, "must contain an uppercase letter")
-    .matches(/[a-z]/, "must contain a lowercase letter")
-    .matches(/[0-9]/, "must contain a number")
-    .matches(/[!@#$%^&*():|<>{}]/, "must contain a special symbol"),
+    .matches(PASSWORD_REGEX.uppercase, "must contain an uppercase letter")
+    .matches(PASSWORD_REGEX.lowercase, "must contain a lowercase letter")
+    .matches(PASSWORD_REGEX.number, "must contain a number")
+    .matches(PASSWORD_REGEX.special, "must contain a special symbol"),
 });

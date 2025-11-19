@@ -176,7 +176,18 @@ export const SignUpScreen = () => {
                     onPress={() =>
                       setValue("terms", !terms, { shouldValidate: true })
                     }
+                    label={
+                      <Text variant="checkBoxLabel" color="textPrimary">
+                        I agree to the{" "}
+                        <Text color="textFourtiary">
+                          Terms and Conditions, Privacy Policy{" "}
+                        </Text>
+                        <Text color="textPrimary">and </Text>
+                        <Text color="textFourtiary">Content Policy</Text>
+                      </Text>
+                    }
                   />
+
                   <Button
                     label="Create Account"
                     onPress={handleCreateAccount}
