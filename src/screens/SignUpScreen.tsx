@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, Text, Button, Checkbox, LogoIcon } from "../components/ui";
+import React, { useState } from "react";
+import { Box, Text, Button, LogoIcon } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +7,7 @@ import { FormInput } from "../components/forms/FormInput";
 import { PasswordInput } from "../components/ui";
 import { useAuth } from "../contexts/AuthContext";
 import { signUpSchema } from "../components/forms/validation/signUpSchema";
+import { FormCheckBox } from "../components/forms/FormCheckBox";
 
 type SignUpFormData = {
   fullName: string;
@@ -171,11 +172,8 @@ export const SignUpScreen = () => {
                     autoComplete="password"
                     textContentType="newPassword"
                   />
-                  <Checkbox
-                    checked={terms}
-                    onPress={() =>
-                      setValue("terms", !terms, { shouldValidate: true })
-                    }
+                  <FormCheckBox
+                    name="terms"
                     label={
                       <Text variant="checkBoxLabel" color="textPrimary">
                         I agree to the{" "}
