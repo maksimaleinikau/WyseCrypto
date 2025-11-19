@@ -20,6 +20,10 @@ export type RootParamList = {
   Portfolio: undefined;
   HoldingDetails: { id: string; title: string };
   AccountInformation: undefined;
+
+  EditPersonalInfo: undefined;
+  EditEmail: undefined;
+  ChangePassword: undefined;
 };
 
 export type MainTabParamList = {
@@ -31,6 +35,7 @@ export type AuthStackParamlist = {
   SignIn: undefined;
   SignUp: undefined;
 };
+
 export interface Investment {
   id: string;
   name: string;

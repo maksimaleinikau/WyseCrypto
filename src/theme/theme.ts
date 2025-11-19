@@ -143,7 +143,6 @@ const theme = createTheme({
       width: "100%",
       paddingVertical: "sm",
       paddingHorizontal: "sm2",
-      marginBottom: "m",
     },
     primary: {
       backgroundColor: "primary",

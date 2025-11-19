@@ -6,6 +6,9 @@ import {
   PortfolioScreen,
   HoldingDetailsScreen,
   AccountInformationScreen,
+  EditPersonalInfoScreen,
+  EditEmailScreen,
+  ChangePasswordScreen,
 } from "../screens";
 import { RootParamList } from "./types";
 
@@ -14,7 +17,6 @@ const Stack = createNativeStackNavigator<RootParamList>();
 export const AppStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="MainTabs" component={MainTabs} />
-
     <Stack.Screen
       name="SecurityDetails"
       component={SecurityDetailsScreen}
@@ -45,6 +47,23 @@ export const AppStack = () => (
       name="AccountInformation"
       component={AccountInformationScreen}
       options={{ headerShown: true }}
+    />
+    <Stack.Screen
+      name="EditPersonalInfo"
+      component={EditPersonalInfoScreen}
+      options={{ headerShown: true, title: "Edit Personal Information" }}
+    />
+
+    <Stack.Screen
+      name="EditEmail"
+      component={EditEmailScreen}
+      options={{ headerShown: true, title: "Edit Email" }}
+    />
+
+    <Stack.Screen
+      name="ChangePassword"
+      component={ChangePasswordScreen}
+      options={{ headerShown: true, title: "Change Password" }}
     />
   </Stack.Navigator>
 );

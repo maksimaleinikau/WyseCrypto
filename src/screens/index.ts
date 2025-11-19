@@ -8,3 +8,6 @@ export { HoldingDetailsScreen } from "./HoldingDetailsScreen";
 export { SecurityDetailsScreen } from "./SecurityDetailsScreen";
 export { PlaceOrderScreen } from "./PlaceOrderScreen";
 export { AccountInformationScreen } from "./AccountInformationScreen";
+export { EditPersonalInfoScreen } from "./EditPersonalInfoScreen";
+export { EditEmailScreen } from "./EditEmailScreen";
+export { ChangePasswordScreen } from "./ChangePasswordScreen";
