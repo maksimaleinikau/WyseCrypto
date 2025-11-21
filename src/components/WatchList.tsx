@@ -3,9 +3,9 @@ import { Security } from "../navigation";
 import { useCallback } from "react";
 import { SecuritiesListItem } from "./Securities";
 export const mockWatchlist: Security[] = [
-  { id: "1", name: "name1", price: 178.5, change24h: 1.2 },
-  { id: "2", name: "name2", price: 2800, change24h: -0.8 },
-  { id: "3", name: "name3", price: 720, change24h: 3.5 },
+  { id: "1", name: "name1", price: 178.5, change24h: 1.2, symbol: "EURUSD" },
+  { id: "2", name: "name2", price: 2800, change24h: -0.8, symbol: "USDJPY" },
+  { id: "3", name: "name3", price: 720, change24h: 3.5, symbol: "AUDUSD" },
 ];
 
 export type WatchListProps = {

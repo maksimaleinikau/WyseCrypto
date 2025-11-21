@@ -33,7 +33,7 @@ const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
 ]);
 
 export interface InputProps extends RestyleProps, TextInputProps {
-  variant?: "default" | "focused" | "disabled";
+  variant?: "default" | "focused" | "disabled" | "calculated";
   label?: string;
   onValueChange?: (value: string) => void;
   errorMessage?: string;

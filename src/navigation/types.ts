@@ -16,6 +16,7 @@ export type RootParamList = {
     title: string;
     price: number;
     change24h: number;
+    symbol: string;
   };
   Portfolio: undefined;
   HoldingDetails: { id: string; title: string };
@@ -44,8 +45,8 @@ export interface Investment {
 }
 export interface Security {
   id: string;
-  symbol: string;
   name: string;
   price: number;
   change24h: number;
+  symbol: string;
 }

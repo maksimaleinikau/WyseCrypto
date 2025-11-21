@@ -37,7 +37,13 @@ const restyleFunctions = composeRestyleFunctions<Theme, RestyleProps>([
 type Props = RestyleProps & {
   onPress: () => void;
   label: string;
-  variant?: "primary" | "secondary" | "danger" | "disabled";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "disabled"
+    | "confirm"
+    | "smallAction";
   disabled?: boolean;
 };
 

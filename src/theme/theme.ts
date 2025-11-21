@@ -1,6 +1,5 @@
 import { createTheme } from "@shopify/restyle";
 import { palette } from "./palette";
-import { Checkbox } from "../components/ui";
 
 const theme = createTheme({
   spacing: {
@@ -13,6 +12,7 @@ const theme = createTheme({
     m2: 19,
     l: 24,
     xl: 32,
+    xxl:40,
     "2xl": 48,
     "4xl": 72,
   },
@@ -27,6 +27,7 @@ const theme = createTheme({
 
     mainBackground: palette.light,
     cardBackground: palette.white,
+    cardBackgroundInactive: palette.lightgray2,
 
     textPrimary: palette.black,
     textSecondary: palette.gray,
@@ -134,35 +135,54 @@ const theme = createTheme({
       fontWeight: "600",
       lineHeight: 18,
     },
+    cardInactive: {
+      fontSize: 12,
+      fontWeight: "400",
+    },
   },
   buttonVariants: {
     defaults: {
       borderRadius: 4,
       alignItems: "center",
       justifyContent: "center",
-      width: "100%",
       paddingVertical: "sm",
       paddingHorizontal: "sm2",
     },
     primary: {
       backgroundColor: "primary",
       color: "textInverted",
+      width: "100%",
     },
     secondary: {
       backgroundColor: "buttonSecondary",
       color: "textPrimary",
+      width: "100%",
     },
     danger: {
       backgroundColor: "cardBackground",
       borderWidth: 1,
       borderColor: "danger",
       color: "textDanger",
+      width: "100%",
     },
     disabled: {
       backgroundColor: "buttonDisabled",
       borderWidth: 1,
       borderColor: "buttonDisabled",
       color: "textTertiary",
+      width: "100%",
+    },
+    confirm: {
+      backgroundColor: "danger",
+      color: "textInverted",
+      width: "100%",
+    },
+    smallAction: {
+      backgroundColor: "primary",
+      borderRadius: 8,
+      color: "textInverted",
+      paddingVertical: "s",
+      paddingHorizontal: "s",
     },
   },
   inputVariants: {
@@ -193,6 +213,10 @@ const theme = createTheme({
       borderColor: "danger",
       borderWidth: 1,
     },
+    calculated: {
+      backgroundColor: "inputDisabled",
+      borderColor: "inputDisabled",
+    }
   },
   badgeVariants: {
     defaults: {

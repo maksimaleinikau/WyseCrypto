@@ -14,7 +14,7 @@ type SecurityDetailsRouteProps = NativeStackScreenProps<
 
 export const SecurityDetailsScreen = ({ route }: SecurityDetailsRouteProps) => {
   const navigation = useAppNavigation();
-  const { id, title, price, change24h } = route.params;
+  const { id, title, price, change24h, symbol } = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
 
   useLayoutEffect(() => {
@@ -34,6 +34,7 @@ export const SecurityDetailsScreen = ({ route }: SecurityDetailsRouteProps) => {
       title,
       price,
       change24h,
+      symbol,
     });
   };
 
@@ -44,6 +45,7 @@ export const SecurityDetailsScreen = ({ route }: SecurityDetailsRouteProps) => {
       title,
       price,
       change24h,
+      symbol,
     });
   };
 
@@ -58,7 +60,9 @@ export const SecurityDetailsScreen = ({ route }: SecurityDetailsRouteProps) => {
           <Text variant="headerLarge" color="textSecondary" marginBottom="s">
             ${price.toLocaleString()}
           </Text>
-
+          <Text variant="headerLarge" color="textSecondary" marginBottom="s">
+            {symbol}
+          </Text>
           <Text
             variant="subtitle"
             color={change24h >= 0 ? "primary" : "danger"}

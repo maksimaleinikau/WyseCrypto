@@ -13,7 +13,7 @@ export const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {isAuthorized ? (
+        {!isAuthorized ? (
           <Stack.Screen name="MainApp" component={AppStack} />
         ) : (
           <Stack.Screen
