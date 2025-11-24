@@ -35,7 +35,7 @@ export const placeOrderSchema = ({
       .defined()
       .test("required", "Please enter an amount", (value) => !!value?.trim())
       .test("valid-number", "Please enter a valid amount", (value) => {
-        if (!value || value === "." || value === "") return false;
+        if (!value || value === "." || value.trim() === "") return true;
         const num = parseFloat(value);
         return !isNaN(num) && num > 0;
       })

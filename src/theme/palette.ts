@@ -21,6 +21,7 @@ export const palette = {
 
   primaryLight: "#E9FCE9",
   primarylight2: "#E0FFF0",
+  primaryLight3: "#f5fff9",
   warninglight: "#FFFCE0",
   dangerlight: "#FFE0E0",
 };

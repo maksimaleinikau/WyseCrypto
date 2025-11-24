@@ -2,16 +2,14 @@ import { Box, Text, Button, Card, AlertCircleIcon } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootParamList } from "../navigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import {
-  FormProvider,
-  useForm,
-  useWatch,
-  useController,
-} from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { FormInput } from "../components/forms/FormInput";
-import { useEffect } from "react";
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { placeOrderSchema } from "../components/forms/validation/placeOrderSchema";
+import { SuccessPopup } from "../components/modals";
+import { usePlaceOrderLogic } from "../hooks/usePlaceOrderLogic";
+import { useMemo } from "react";
 
 type PlaceOrderRouteProp = NativeStackScreenProps<RootParamList, "PlaceOrder">;
 
@@ -20,13 +18,10 @@ type FormData = {
   usd: string;
 };
 
-export const PlaceOrderScreen = ({
-  route,
-  navigation,
-}: PlaceOrderRouteProp) => {
-  const { side, title, price, symbol } = route.params;
+export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
+  const { side, price, symbol } = route.params;
   const isBuy = side === "BUY";
-
+  const [popupVisible, setPopupVisible] = useState(false);
   const balances = {
     USDT: 15234.56,
     BTC: 0.5234,
@@ -37,14 +32,17 @@ export const PlaceOrderScreen = ({
     CAD: 134.4,
   };
 
-  const cryptoBalance = balances[symbol as keyof typeof balances] || 0;
+  const cryptoBalance = balances[symbol as keyof typeof balances] ?? 0;
 
-  const schema = placeOrderSchema({
-    isBuy,
-    usdtBalance: balances.USDT,
-    cryptoBalance,
-    symbol,
-  });
+  const schema = useMemo(() => {
+    return placeOrderSchema({
+      isBuy,
+      usdtBalance: balances.USDT,
+      cryptoBalance,
+      symbol,
+    });
+  }, [isBuy, cryptoBalance, symbol]);
+
   const methods = useForm<FormData>({
     mode: "onChange",
     resolver: yupResolver(schema),
@@ -55,64 +53,22 @@ export const PlaceOrderScreen = ({
   });
 
   const {
-    control,
     setValue,
-    formState: { errors, isValid },
+    formState: { isValid },
+    getValues,
   } = methods;
 
-  const usdValue = useWatch({ control, name: "usd" });
-  const cryptoValue = useWatch({ control, name: "crypto" });
-
-  useEffect(() => {
-    if (!usdValue || usdValue === "" || usdValue === ".") {
-      setValue("crypto", "");
-      return;
-    }
-
-    let usd = parseFloat(usdValue);
-    if (isNaN(usd) || usd <= 0) {
-      setValue("crypto", "");
-      return;
-    }
-
-    if (isBuy && usd > balances.USDT) {
-      usd = balances.USDT;
-      setValue("usd", usd.toString());
-    }
-
-    const cryptoAmount = usd / price;
-
-    const formattedCrypto = Number(cryptoAmount.toFixed(8)).toString();
-    setValue("crypto", formattedCrypto, { shouldValidate: false });
-  }, [usdValue, price, setValue, isBuy]);
-
-  useEffect(() => {
-    if (!cryptoValue || cryptoValue === "" || cryptoValue === ".") {
-      setValue("usd", "");
-      return;
-    }
-
-    let crypto = parseFloat(cryptoValue);
-    if (isNaN(crypto) || crypto <= 0) {
-      setValue("usd", "");
-      return;
-    }
-
-    const maxCrypto = (balances as any)[symbol] || 0;
-    if (!isBuy && crypto > maxCrypto) {
-      crypto = maxCrypto;
-      setValue("crypto", crypto.toString());
-    }
-
-    const usd = crypto * price;
-    setValue("usd", Number(usd.toFixed(2)).toString());
-  }, [cryptoValue, price, setValue, isBuy, symbol]);
-
+  usePlaceOrderLogic({
+    isBuy,
+    price,
+    watch: methods.watch,
+    setValue,
+  });
   const handleAll = () => {
     if (isBuy) {
-      setValue("usd", balances.USDT.toString());
+      setValue("usd", balances.USDT.toString(), { shouldValidate: true });
     } else {
-      setValue("crypto", cryptoBalance.toString());
+      setValue("crypto", cryptoBalance.toString(), { shouldValidate: true });
     }
   };
 
@@ -205,7 +161,18 @@ export const PlaceOrderScreen = ({
         <Button
           label={`Confirm ${side}`}
           variant={isBuy ? "primary" : "confirm"}
-          onPress={() => alert(`${side} order placed!`)}
+          onPress={() => {
+            if (isValid) {
+              setPopupVisible(true);
+            }
+          }}
+        />
+        <SuccessPopup
+          visible={popupVisible}
+          onClose={() => setPopupVisible(false)}
+          side={side}
+          symbol={symbol}
+          cryptoAmount={getValues("crypto") || "0"}
         />
       </Box>
     </SafeAreaView>

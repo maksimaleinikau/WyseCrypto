@@ -12,8 +12,9 @@ const theme = createTheme({
     m2: 19,
     l: 24,
     xl: 32,
-    xxl:40,
+    xxl: 40,
     "2xl": 48,
+    "3xl": 53,
     "4xl": 72,
   },
 
@@ -61,6 +62,9 @@ const theme = createTheme({
     successText: palette.success,
     pendingText: palette.warning,
     failureText: palette.danger,
+
+    successPopup: palette.primaryLight3,
+    successPopupLabel: palette.gray,
   },
 
   textVariants: {
@@ -74,6 +78,10 @@ const theme = createTheme({
       fontWeight: "700",
       color: "textPrimary",
     },
+    headerXXL2: {
+      fontSize: 24,
+      fontWeight: "700",
+    },
     headerXL: {
       fontSize: 20,
       fontWeight: "700",
@@ -84,6 +92,11 @@ const theme = createTheme({
       fontWeight: "700",
       color: "textPrimary",
     },
+    headerLarge2: {
+      fontSize: 16,
+      fontWeight: "400",
+    },
+
     subtitle: {
       fontSize: 14,
       fontWeight: "600",
@@ -216,7 +229,7 @@ const theme = createTheme({
     calculated: {
       backgroundColor: "inputDisabled",
       borderColor: "inputDisabled",
-    }
+    },
   },
   badgeVariants: {
     defaults: {
