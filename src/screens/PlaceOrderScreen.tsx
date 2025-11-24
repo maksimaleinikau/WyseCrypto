@@ -53,17 +53,11 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
   });
 
   const {
-    watch,
     setValue,
     formState: { isValid },
   } = methods;
 
-  usePlaceOrderLogic({
-    isBuy,
-    price,
-    watch,
-    setValue,
-  });
+  const sync = usePlaceOrderLogic(price, setValue);
 
   const handleAll = () => {
     if (isBuy) {
@@ -117,6 +111,7 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
                   placeholder="0.00"
                   keyboardType="decimal-pad"
                   label="Amount USDT"
+                  onValueChange={(text) => sync("usd", text)}
                 />
                 <FormInput
                   name="crypto"
@@ -124,6 +119,7 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
                   keyboardType="decimal-pad"
                   variant="calculated"
                   label={`Amount ${symbol}`}
+                  onValueChange={(text) => sync("crypto", text)}
                 />
               </>
             ) : (
@@ -133,6 +129,7 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
                   placeholder="0.00"
                   keyboardType="decimal-pad"
                   label={`Amount ${symbol}`}
+                  onValueChange={(text) => sync("crypto", text)}
                 />
                 <FormInput
                   name="usd"
@@ -140,6 +137,7 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
                   keyboardType="decimal-pad"
                   label="Amount USDT"
                   variant="calculated"
+                  onValueChange={(text) => sync("usd", text)}
                 />
               </>
             )}

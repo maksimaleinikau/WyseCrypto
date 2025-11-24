@@ -1,42 +1,37 @@
-import { useEffect } from "react";
-import type { UseFormWatch, UseFormSetValue } from "react-hook-form";
+import type { UseFormSetValue } from "react-hook-form";
 
-type FormData = { usd: string; crypto: string };
+export const usePlaceOrderLogic = (
+  price: number,
+  setValue: UseFormSetValue<{ usd: string; crypto: string }>
+) => {
+  const sync = (from: "usd" | "crypto", text: string) => {
+    setValue(from, text);
 
-export const usePlaceOrderLogic = ({
-  isBuy,
-  price,
-  watch,
-  setValue,
-}: {
-  isBuy: boolean;
-  price: number;
-  watch: UseFormWatch<FormData>;
-  setValue: UseFormSetValue<FormData>;
-}) => {
-  const usd = watch("usd");
-  const crypto = watch("crypto");
+    if (text.trim() === "") {
+      const to = from === "usd" ? "crypto" : "usd";
 
-  useEffect(() => {
-    const activeField = isBuy ? usd : crypto;
-    const calculatedField = isBuy ? "crypto" : "usd";
-
-    if (activeField === undefined) {
-      setValue(calculatedField, "", { shouldValidate: false });
+      setValue(to, "");
+      return;
+    }
+    if (text.endsWith(".")) {
       return;
     }
 
-    if (!activeField?.trim() || activeField.endsWith(".")) {
+    const num = parseFloat(text);
+    if (isNaN(num) || num <= 0) {
       return;
     }
 
-    const num = parseFloat(activeField);
-    if (isNaN(num) || num <= 0) return;
+    if (from === "usd") {
+      const result = (num / price).toFixed(8).replace(/\.?0+$/, "");
 
-    const result = isBuy
-      ? (num / price).toFixed(8).replace(/\.?0+$/, "")
-      : (num * price).toFixed(2);
+      setValue("crypto", result || "0");
+    } else {
+      const result = (num * price).toFixed(2);
 
-    setValue(calculatedField, result || "0", { shouldValidate: false });
-  }, [isBuy, price, usd, crypto, setValue]);
+      setValue("usd", result);
+    }
+  };
+
+  return sync;
 };

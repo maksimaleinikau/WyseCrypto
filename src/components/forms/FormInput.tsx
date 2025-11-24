@@ -3,10 +3,9 @@ import { Input, InputProps } from "../ui/Input";
 
 type FormInputProps = InputProps & {
   name: string;
-  onSync?: () => void;
 };
 
-export const FormInput = ({ name, onSync, ...inputProps }: FormInputProps) => {
+export const FormInput = ({ name, ...inputProps }: FormInputProps) => {
   const { control } = useFormContext();
   const {
     field: { value, onChange, onBlur },
@@ -17,7 +16,9 @@ export const FormInput = ({ name, onSync, ...inputProps }: FormInputProps) => {
     <Input
       {...inputProps}
       value={value || ""}
-      onValueChange={onChange}
+      onValueChange={(text) => {
+        onChange(text, inputProps.onValueChange?.(text));
+      }}
       onBlur={onBlur}
       errorMessage={error?.message}
     />
