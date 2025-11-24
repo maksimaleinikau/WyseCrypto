@@ -3,9 +3,10 @@ import { Input, InputProps } from "../ui/Input";
 
 type FormInputProps = InputProps & {
   name: string;
+  onSync?: () => void;
 };
 
-export const FormInput = ({ name, ...inputProps }: FormInputProps) => {
+export const FormInput = ({ name, onSync, ...inputProps }: FormInputProps) => {
   const { control } = useFormContext();
   const {
     field: { value, onChange, onBlur },

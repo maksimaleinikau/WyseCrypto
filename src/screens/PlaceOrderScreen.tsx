@@ -53,17 +53,18 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
   });
 
   const {
+    watch,
     setValue,
     formState: { isValid },
-    getValues,
   } = methods;
 
   usePlaceOrderLogic({
     isBuy,
     price,
-    watch: methods.watch,
+    watch,
     setValue,
   });
+
   const handleAll = () => {
     if (isBuy) {
       setValue("usd", balances.USDT.toString(), { shouldValidate: true });
@@ -172,7 +173,7 @@ export const PlaceOrderScreen = ({ route }: PlaceOrderRouteProp) => {
           onClose={() => setPopupVisible(false)}
           side={side}
           symbol={symbol}
-          cryptoAmount={getValues("crypto") || "0"}
+          cryptoAmount={methods.getValues("crypto") || "0"}
         />
       </Box>
     </SafeAreaView>
