@@ -5,8 +5,6 @@ export const usePlaceOrderLogic = (
   setValue: UseFormSetValue<{ usd: string; crypto: string }>
 ) => {
   const sync = (from: "usd" | "crypto", text: string) => {
-    setValue(from, text);
-
     if (text.trim() === "") {
       const to = from === "usd" ? "crypto" : "usd";
 
