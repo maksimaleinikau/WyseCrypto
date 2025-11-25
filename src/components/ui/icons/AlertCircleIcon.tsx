@@ -1,12 +1,13 @@
+import * as React from "react";
 import Svg, { SvgProps, Path } from "react-native-svg";
 const AlertCircleIcon = (props: SvgProps) => (
-  <Svg width={40} height={40} fill="none" {...props}>
+  <Svg width={24} height={24} fill="none" {...props}>
     <Path
-      stroke="#000"
+      stroke="#5D5C5D"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
-      d="M20 36.667c9.205 0 16.667-7.462 16.667-16.667 0-9.205-7.462-16.667-16.667-16.667-9.205 0-16.667 7.462-16.667 16.667 0 9.205 7.462 16.667 16.667 16.667ZM20 13.333V20M20 26.667h.017"
+      d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10ZM12 8v4M12 16h.01"
     />
   </Svg>
 );

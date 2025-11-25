@@ -17,9 +17,11 @@ export const palette = {
   gray3: "#EBEFF2",
   gray4: "#EBF2EB",
   ligthgray: "#F8FCFD",
+  lightgray2: "#F1F1F1",
 
   primaryLight: "#E9FCE9",
   primarylight2: "#E0FFF0",
+  primaryLight3: "#f5fff9",
   warninglight: "#FFFCE0",
   dangerlight: "#FFE0E0",
 };

@@ -13,10 +13,10 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
   const handlePress = () => {
     navigation.navigate("SecurityDetails", {
       id: item.id,
-      symbol: item.symbol,
       title: item.name,
       price: item.price,
       change24h: item.change24h,
+      symbol: item.symbol,
     });
   };
 
@@ -44,7 +44,9 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
               <Text variant="headerXL" marginBottom="xs">
                 {item.name}
               </Text>
-              <Text variant="listSubtitle">{item.symbol}</Text>
+              <Text variant="headerXL" marginBottom="xs">
+                {item.symbol}
+              </Text>
             </Box>
           </Box>
 

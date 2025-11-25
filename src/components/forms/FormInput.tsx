@@ -16,7 +16,10 @@ export const FormInput = ({ name, ...inputProps }: FormInputProps) => {
     <Input
       {...inputProps}
       value={value || ""}
-      onValueChange={onChange}
+      onValueChange={(text) => {
+        onChange(text);
+        inputProps.onValueChange?.(text);
+      }}
       onBlur={onBlur}
       errorMessage={error?.message}
     />

@@ -1,5 +1,5 @@
 import { Modal } from "react-native";
-import { Box, Text, Button, Card } from "../ui";
+import { Box, Text, Button, Card, InfoCircleIcon } from "../ui";
 
 type LogoutModalProps = {
   visible: boolean;
@@ -15,16 +15,8 @@ export const LogoutModal = ({
   return (
     <Modal visible={visible} transparent animationType="fade">
       <Box flex={1} justifyContent="center" alignItems="center" padding="l">
-        <Card padding="l" flexDirection="column">
-          <Text
-            variant="headerLarge"
-            color="textPrimary"
-            textAlign="center"
-            marginBottom="m"
-          >
-            Log out
-          </Text>
-
+        <Card padding="xxl" flexDirection="column" alignItems="center" gap="l">
+          <InfoCircleIcon />
           <Text
             variant="modalText"
             color="textSecondary"
@@ -34,20 +26,18 @@ export const LogoutModal = ({
             Are you sure you want to log out?
           </Text>
 
-          <Box flexDirection="row" gap="s">
-            <Button
-              label="Logout"
-              onPress={onConfirm}
-              variant="danger"
-              flex={1}
-              paddingVertical="m"
-            />
+          <Box flexDirection="row" gap="m">
             <Button
               label="Cancel"
               onPress={onCancel}
-              variant="secondary"
+              variant="danger"
               flex={1}
-              paddingVertical="m"
+            />
+            <Button
+              label="Logout"
+              onPress={onConfirm}
+              variant="confirm"
+              flex={1}
             />
           </Box>
         </Card>
