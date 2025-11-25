@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useAuth } from "../contexts/AuthContext";
+import { useSelector } from "react-redux";
+import { selectIsAuthorized } from "../store/accountSelector";
 import { RootParamList } from "./types";
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";
@@ -8,12 +9,12 @@ import { AuthStack } from "./AuthStack";
 const Stack = createNativeStackNavigator<RootParamList>();
 
 export const AppNavigator = () => {
-  const { isAuthorized } = useAuth();
+  const isAuthorized = useSelector(selectIsAuthorized);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!isAuthorized ? (
+        {isAuthorized ? (
           <Stack.Screen name="MainApp" component={AppStack} />
         ) : (
           <Stack.Screen

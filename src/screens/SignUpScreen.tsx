@@ -5,9 +5,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput } from "../components/forms/FormInput";
 import { PasswordInput } from "../components/ui";
-import { useAuth } from "../contexts/AuthContext";
+import { useDispatch } from "react-redux";
 import { signUpSchema } from "../components/forms/validation/signUpSchema";
 import { FormCheckBox } from "../components/forms/FormCheckBox";
+import { AppDispatch } from "../store/store";
+import { signIn } from "../store/accountActions";
 
 type SignUpFormData = {
   fullName: string;
@@ -20,7 +22,7 @@ type SignUpFormData = {
 
 export const SignUpScreen = () => {
   const [step, setStep] = useState<1 | 2>(1);
-  const { login } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
 
   const methods = useForm<SignUpFormData>({
     mode: "onChange",
@@ -55,12 +57,14 @@ export const SignUpScreen = () => {
   const onSubmit = (data: SignUpFormData) => {
     const { confirmPassword, ...userData } = data; // no need to send confirmPassword
 
-    login({
-      email: data.email,
-      fullName: data.fullName || undefined,
-      phoneNumber: data.phoneNumber || undefined,
-      password: data.password,
-    });
+    dispatch(
+      signIn({
+        email: data.email,
+        fullName: data.fullName || undefined,
+        phoneNumber: data.phoneNumber || undefined,
+        password: data.password,
+      })
+    );
 
     console.log("Account created", userData);
   };
