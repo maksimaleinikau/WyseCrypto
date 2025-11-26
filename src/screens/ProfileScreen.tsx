@@ -1,18 +1,20 @@
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAuth } from "../contexts/AuthContext";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/accountActions";
 import { useState } from "react";
 import { LogoutModal } from "../components/modals";
 import { useAppNavigation } from "../hooks/useAppNavigation";
+import { AppDispatch } from "../store/store";
 
 export const ProfileScreen = () => {
   const navigation = useAppNavigation();
-  const { logout } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleLogout = () => {
     setModalVisible(false);
-    logout();
+    dispatch(logout());
   };
 
   return (

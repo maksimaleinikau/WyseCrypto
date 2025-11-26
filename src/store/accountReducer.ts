@@ -1,4 +1,12 @@
-import { SIGN_IN, SIGN_UP, LOGOUT, type AccountAction } from "./accountTypes";
+import {
+  SIGN_IN,
+  SIGN_UP,
+  LOGOUT,
+  type AccountAction,
+  EDIT_PERSONAL_INFORMATION,
+  EDIT_EMAIL,
+  CHANGE_PASSWORD,
+} from "./accountTypes";
 
 export interface AccountState {
   email: string;
@@ -30,6 +38,22 @@ export const accountReducer = (
       };
     case LOGOUT:
       return initialState;
+    case EDIT_PERSONAL_INFORMATION:
+      return {
+        ...state,
+        fullName: action.payload.fullName ?? state.fullName,
+        phoneNumber: action.payload.phoneNumber ?? state.phoneNumber,
+      };
+    case EDIT_EMAIL:
+      return {
+        ...state,
+        email: action.payload.email,
+      };
+    case CHANGE_PASSWORD:
+      return {
+        ...state,
+        password: action.payload.password,
+      };
     default:
       return state;
   }
