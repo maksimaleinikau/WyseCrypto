@@ -1,14 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Box, Button } from "../components/ui";
 import { useSelector, useDispatch } from "react-redux";
-import { editEmail } from "../store/accountActions";
+import { editEmail } from "../store/authSlice";
 import { useForm, FormProvider } from "react-hook-form";
 import { editEmailSchema } from "../components/forms/validation/editEmailSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput } from "../components/forms/FormInput";
 import { PasswordInput } from "../components/ui";
 import { AppDispatch } from "../store/store";
-import { selectEmail } from "../store/accountSelectors";
+import { selectEmail } from "../store/authSelectors";
 
 type EditEmailFormData = {
   email: string;
@@ -31,7 +31,7 @@ export const EditEmailScreen = () => {
   const newEmail = watch("email");
 
   const onSubmit = (data: EditEmailFormData) => {
-    dispatch(editEmail({ email: data.email }));
+    dispatch(editEmail(data.email));
   };
 
   return (

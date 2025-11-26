@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import { selectIsAuthorized } from "../store/accountSelectors";
+import { selectIsAuthorized } from "../store/authSelectors";
 import { RootParamList } from "./types";
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";

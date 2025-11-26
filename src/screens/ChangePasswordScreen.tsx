@@ -1,13 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Box, Button } from "../components/ui";
 import { useSelector, useDispatch } from "react-redux";
-import { changePassword } from "../store/accountActions";
+import { changePassword } from "../store/authSlice";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { changePasswordSchema } from "../components/forms/validation/changePasswordSchema";
 import { PasswordInput } from "../components/ui";
 import { AppDispatch, RootState } from "../store/store";
-import { selectCurrentPassword } from "../store/accountSelectors";
+import { selectCurrentPassword } from "../store/authSelectors";
 
 type ChangePasswordFormData = {
   oldPassword: string;
@@ -31,7 +31,7 @@ export const ChangePasswordScreen = () => {
   const { handleSubmit, formState } = methods;
 
   const onSubmit = (data: ChangePasswordFormData) => {
-    dispatch(changePassword({ password: data.newPassword }));
+    dispatch(changePassword(data.newPassword));
     console.log("Password changed", data);
   };
 
