@@ -36,17 +36,3 @@ export type AuthStackParamlist = {
   SignIn: undefined;
   SignUp: undefined;
 };
-
-export interface Investment {
-  id: string;
-  name: string;
-  amount: number;
-  change: number;
-}
-export interface Security {
-  id: string;
-  name: string;
-  price: number;
-  change24h: number;
-  symbol: string;
-}

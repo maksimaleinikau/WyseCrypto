@@ -1,11 +1,6 @@
 import { Box, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  InvestmentsList,
-  mockInvestments,
-  mockWatchlist,
-  WatchList,
-} from "../components";
+import { InvestmentsList, WatchList } from "../components";
 import { useAppNavigation } from "../hooks/useAppNavigation";
 
 export const HomeScreen = () => {
@@ -19,8 +14,8 @@ export const HomeScreen = () => {
           onPress={() => navigation.navigate("Portfolio")}
           marginBottom="l"
         />
-        <InvestmentsList data={mockInvestments} />
-        <WatchList data={mockWatchlist} />
+        <InvestmentsList />
+        <WatchList />
       </Box>
     </SafeAreaView>
   );

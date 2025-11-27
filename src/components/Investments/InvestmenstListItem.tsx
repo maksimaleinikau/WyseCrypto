@@ -1,13 +1,8 @@
 import { Pressable } from "react-native";
 import { Box, Text, Badge, Card } from "../ui";
 import { useNavigation } from "@react-navigation/native";
-import { Investment } from "../../navigation/types";
 
-type InvestmentsListItemProps = {
-  item: Investment;
-};
-
-export const InvestmentsListItem = ({ item }: InvestmentsListItemProps) => {
+export const InvestmentsListItem = ({ item }: { item: any }) => {
   const navigation = useNavigation<any>();
 
   const handlePress = () => {

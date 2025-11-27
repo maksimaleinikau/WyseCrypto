@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { signUpSchema } from "../components/forms/validation/signUpSchema";
 import { FormCheckBox } from "../components/forms/FormCheckBox";
 import { AppDispatch } from "../store/store";
-import { signIn } from "../store/accountActions";
+import { signUp } from "../store/authSlice";
 
 type SignUpFormData = {
   fullName: string;
@@ -58,11 +58,11 @@ export const SignUpScreen = () => {
     const { confirmPassword, ...userData } = data; // no need to send confirmPassword
 
     dispatch(
-      signIn({
+      signUp({
         email: data.email,
-        fullName: data.fullName || undefined,
-        phoneNumber: data.phoneNumber || undefined,
         password: data.password,
+        fullName: data.fullName || "",
+        phoneNumber: data.phoneNumber || "",
       })
     );
 

@@ -12,7 +12,7 @@ import { useTheme } from "@shopify/restyle";
 import { LogoIcon } from "../components/ui";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { signIn } from "../store/accountActions";
+import { signIn } from "../store/authSlice";
 
 type SignInFormData = { email: string; password: string };
 

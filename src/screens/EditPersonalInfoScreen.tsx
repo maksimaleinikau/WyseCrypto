@@ -40,8 +40,8 @@ export const EditPersonalInfoScreen = () => {
   const onSubmit = (data: EditPersonalInfoFormData) => {
     dispatch(
       editPersonalInformation({
-        fullName: data.fullName || undefined,
-        phoneNumber: data.phoneNumber || undefined,
+        fullName: data.fullName,
+        phoneNumber: data.phoneNumber,
       })
     );
     console.log("Saved:", data);

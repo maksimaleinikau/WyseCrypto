@@ -1,29 +1,20 @@
 import { FlatList } from "react-native";
-import { Investment } from "../../navigation";
 import { useCallback } from "react";
 import { InvestmentsListItem } from "./InvestmenstListItem";
+import { useSelector } from "react-redux";
+import { selectInvestments } from "../../store/portfolioSelectors";
 
-export const mockInvestments: Investment[] = [
-  { id: "1", name: "BTC", amount: 50000, change: 2.5 },
-  { id: "2", name: "ETH", amount: 3000, change: -1.2 },
-  { id: "3", name: "LTC", amount: 2.5, change: -5.7 },
-];
+export const InvestmentsList = () => {
+  const investments = useSelector(selectInvestments);
 
-type InvestmentsListProps = {
-  data?: Investment[];
-};
-export const InvestmentsList = ({
-  data = mockInvestments,
-}: InvestmentsListProps) => {
   const renderItem = useCallback(
-    ({ item }: { item: Investment }) => <InvestmentsListItem item={item} />,
+    ({ item }: any) => <InvestmentsListItem item={item} />,
     []
   );
-  const keyExtractor = useCallback((item: Investment) => item.id, []);
-
+  const keyExtractor = useCallback((item: any) => item.id, []);
   return (
     <FlatList
-      data={data}
+      data={investments}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       showsVerticalScrollIndicator={false}

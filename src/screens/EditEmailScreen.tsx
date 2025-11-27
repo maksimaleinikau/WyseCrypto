@@ -64,9 +64,7 @@ export const EditEmailScreen = () => {
               label="Change Email"
               onPress={handleSubmit(onSubmit)}
               variant="primary"
-              disabled={
-                !formState.isValid || methods.watch("email") === currentEmail
-              }
+              disabled={!formState.isValid || watch("email") === currentEmail}
             />
           </Box>
         </FormProvider>

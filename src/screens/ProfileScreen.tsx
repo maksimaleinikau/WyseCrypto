@@ -1,7 +1,7 @@
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from "react-redux";
-import { logout } from "../store/accountActions";
+import { logout } from "../store/authSlice";
 import { useState } from "react";
 import { LogoutModal } from "../components/modals";
 import { useAppNavigation } from "../hooks/useAppNavigation";

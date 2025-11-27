@@ -1,8 +1,10 @@
 import { Box, LoadingIndicator, SearchInput } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { SecuritiesList, mockSecurities } from "../components";
+import { SecuritiesList } from "../components";
 import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { useMemo, useDeferredValue } from "react";
+import { useSelector } from "react-redux";
+import { selectSecurities } from "../store/marketSelectors";
 
 export const MarketScreen = () => {
   const methods = useForm();
@@ -11,15 +13,17 @@ export const MarketScreen = () => {
   const deferredSearch = useDeferredValue(search);
   const isPending = search !== deferredSearch;
 
-  const filteredData = useMemo(() => {
+  const securities = useSelector(selectSecurities);
+
+  const filteredSecurities = useMemo(() => {
     const loadingTime = Date.now();
     while (Date.now() - loadingTime < 500) {} //loading imitation
-    return mockSecurities.filter(
+    return securities.filter(
       (item) =>
         item.symbol.toLowerCase().includes(deferredSearch.toLowerCase()) ||
         item.name.toLowerCase().includes(deferredSearch.toLowerCase())
     );
-  }, [deferredSearch]);
+  }, [securities, deferredSearch]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -31,7 +35,7 @@ export const MarketScreen = () => {
             {isPending ? (
               <LoadingIndicator />
             ) : (
-              <SecuritiesList data={filteredData} />
+              <SecuritiesList data={filteredSecurities} />
             )}
           </Box>
         </FormProvider>
