@@ -1,10 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Box, Button } from "../components/ui";
-import { useAuth } from "../contexts/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { changePassword } from "../store/authSlice";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { changePasswordSchema } from "../components/forms/validation/changePasswordSchema";
 import { PasswordInput } from "../components/ui";
+import { AppDispatch, RootState } from "../store/store";
+import { selectCurrentPassword } from "../store/authSelectors";
 
 type ChangePasswordFormData = {
   oldPassword: string;
@@ -13,10 +16,11 @@ type ChangePasswordFormData = {
 };
 
 export const ChangePasswordScreen = () => {
-  const { user } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
+  const currentPassword = useSelector(selectCurrentPassword);
   const methods = useForm<ChangePasswordFormData>({
     mode: "onChange",
-    resolver: yupResolver(changePasswordSchema(user?.password || "")),
+    resolver: yupResolver(changePasswordSchema(currentPassword)),
     defaultValues: {
       oldPassword: "",
       newPassword: "",
@@ -24,7 +28,10 @@ export const ChangePasswordScreen = () => {
     },
   });
 
+  const { handleSubmit, formState } = methods;
+
   const onSubmit = (data: ChangePasswordFormData) => {
+    dispatch(changePassword(data.newPassword));
     console.log("Password changed", data);
   };
 
@@ -62,9 +69,9 @@ export const ChangePasswordScreen = () => {
             />
             <Button
               label="Change Password"
-              onPress={methods.handleSubmit(onSubmit)}
+              onPress={handleSubmit(onSubmit)}
               variant="primary"
-              disabled={!methods.formState.isValid}
+              disabled={!formState.isValid}
             />
           </Box>
         </FormProvider>

@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Box, Text, Button } from "../components/ui";
+import { Box, Button } from "../components/ui";
 import { useAppNavigation } from "../hooks/useAppNavigation";
 
 export const AccountInformationScreen = () => {

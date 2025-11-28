@@ -1,26 +1,21 @@
 import { FlatList } from "react-native";
-import { Security } from "../navigation";
+import { Security } from "../store/marketSlice";
 import { useCallback } from "react";
 import { SecuritiesListItem } from "./Securities";
-export const mockWatchlist: Security[] = [
-  { id: "1", name: "name1", price: 178.5, change24h: 1.2, symbol: "EURUSD" },
-  { id: "2", name: "name2", price: 2800, change24h: -0.8, symbol: "USDJPY" },
-  { id: "3", name: "name3", price: 720, change24h: 3.5, symbol: "AUDUSD" },
-];
+import { useSelector } from "react-redux";
+import { selectWatchList } from "../store/marketSelectors";
 
-export type WatchListProps = {
-  data?: Security[];
-};
+export const WatchList = () => {
+  const watchList = useSelector(selectWatchList);
 
-export const WatchList = ({ data = mockWatchlist }: WatchListProps) => {
   const renderItem = useCallback(
     ({ item }: { item: Security }) => <SecuritiesListItem item={item} />,
     []
   );
-  const keyExtractor = useCallback((item: Security) => item.id, []);
+  const keyExtractor = useCallback((item: Security) => item.symbol, []);
   return (
     <FlatList
-      data={data}
+      data={watchList}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       showsVerticalScrollIndicator={false}

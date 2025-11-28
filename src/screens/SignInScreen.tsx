@@ -1,6 +1,5 @@
 import { Box, Text, Button } from "../components/ui";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAuth } from "../contexts/AuthContext";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormInput } from "../components/forms/FormInput";
 import { PasswordInput } from "../components/ui";
@@ -11,11 +10,14 @@ import { AuthStackParamlist } from "../navigation";
 import { Theme } from "../theme";
 import { useTheme } from "@shopify/restyle";
 import { LogoIcon } from "../components/ui";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
+import { signIn } from "../store/authSlice";
 
 type SignInFormData = { email: string; password: string };
 
 export const SignInScreen = () => {
-  const { login } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme<Theme>();
   const navigation = useNavigation<NavigationProp<AuthStackParamlist>>();
   const methods = useForm<SignInFormData>({
@@ -33,7 +35,12 @@ export const SignInScreen = () => {
 
   const handleSignIn = (data: SignInFormData) => {
     console.log(data);
-    login({ email: data.email, password: data.password });
+    dispatch(
+      signIn({
+        email: data.email,
+        password: data.password,
+      })
+    );
   };
 
   return (

@@ -26,7 +26,6 @@ export const usePlaceOrderLogic = (
       setValue("crypto", result || "0");
     } else {
       const result = (num * price).toFixed(2);
-
       setValue("usd", result);
     }
   };

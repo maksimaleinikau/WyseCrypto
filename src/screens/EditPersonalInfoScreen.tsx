@@ -2,9 +2,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Box, Button } from "../components/ui";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormInput } from "../components/forms/FormInput";
-import { useAuth } from "../contexts/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser } from "../store/authSelectors";
+import { editPersonalInformation } from "../store/authSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { editPersonalInfoSchema } from "../components/forms/validation/editPersonalInfoSchema";
+import { AppDispatch } from "../store/store";
 
 type EditPersonalInfoFormData = {
   fullName: string;
@@ -12,13 +15,15 @@ type EditPersonalInfoFormData = {
 };
 
 export const EditPersonalInfoScreen = () => {
-  const { user } = useAuth();
+  const dispatch = useDispatch<AppDispatch>();
+  const { fullName, phoneNumber } = useSelector(selectUser);
+
   const methods = useForm<EditPersonalInfoFormData>({
     mode: "onChange",
     resolver: yupResolver(editPersonalInfoSchema),
     defaultValues: {
-      fullName: user?.fullName || "",
-      phoneNumber: user?.phoneNumber || "",
+      fullName: fullName ?? "",
+      phoneNumber: phoneNumber ?? "",
     },
   });
 
@@ -31,8 +36,14 @@ export const EditPersonalInfoScreen = () => {
     });
   }, [user, methods]);*/
   }
-
+  const { handleSubmit, formState } = methods;
   const onSubmit = (data: EditPersonalInfoFormData) => {
+    dispatch(
+      editPersonalInformation({
+        fullName: data.fullName,
+        phoneNumber: data.phoneNumber,
+      })
+    );
     console.log("Saved:", data);
   };
 
@@ -64,9 +75,9 @@ export const EditPersonalInfoScreen = () => {
             />
             <Button
               label="Change personal information"
-              onPress={methods.handleSubmit(onSubmit)}
+              onPress={handleSubmit(onSubmit)}
               variant="primary"
-              disabled={!methods.formState.isValid}
+              disabled={!formState.isValid}
             />
           </Box>
         </FormProvider>

@@ -1,28 +1,35 @@
 import { Pressable } from "react-native";
 import { Box, Text, Badge, Card } from "../ui";
 import { useNavigation } from "@react-navigation/native";
-import { Security } from "../../store/marketSlice";
 
-type SecuritiesListItemProps = {
-  item: Security;
+type HoldingsListItemProps = {
+  item: {
+    symbol: string;
+    name: string;
+    quantity: number;
+    price: number;
+    valueUsd: number;
+    changeUsd: number;
+    changePercentage: number;
+  };
+  onPress?: () => void;
 };
 
-export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
+export const HoldingsListItem = ({ item, onPress }: HoldingsListItemProps) => {
   const navigation = useNavigation<any>();
 
   const handlePress = () => {
-    navigation.navigate("SecurityDetails", {
+    onPress?.();
+    navigation.navigate("HoldingDetails", {
       symbol: item.symbol,
       title: item.name,
-      price: item.price,
-      changePercentage: item.changePercentage,
-      change: item.change,
     });
   };
 
-  const changePercentage = item.changePercentage ?? 0;
-  const isPositive = item.changePercentage >= 0;
-  const changeLabel = `${isPositive ? "+" : ""}${changePercentage}%`;
+  const isPositive = item.changeUsd >= 0;
+  const changeLabel = `${isPositive ? "+" : ""}${item.changeUsd.toFixed(2)}`;
+
+  const ticker = item.symbol.replace("USD", "");
 
   return (
     <Pressable onPress={handlePress}>
@@ -45,15 +52,15 @@ export const SecuritiesListItem = ({ item }: SecuritiesListItemProps) => {
               <Text variant="headerXL" marginBottom="xs">
                 {item.name}
               </Text>
-              <Text variant="headerXL" marginBottom="xs">
-                {item.symbol}
+              <Text variant="headerLarge" color="textSecondary">
+                {item.quantity.toFixed(6).replace(/\.?0+$/, "")} {ticker}
               </Text>
             </Box>
           </Box>
 
           <Box alignItems="flex-end">
             <Text variant="headerLarge" marginBottom="xs">
-              ${item.price.toLocaleString()}
+              ${item.valueUsd.toLocaleString()}
             </Text>
             <Badge
               label={changeLabel}
